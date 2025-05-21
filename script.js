@@ -416,6 +416,200 @@ const medikamente = [
     "dosisintervall": "alle 6 Stunden",
     "kategorie": "Starke Schmerzen",
     "max_einnahmedauer": "kurzfristig"
+  },
+  {
+    "name": "Morphin",
+    "wirkstoff": "Morphin",
+    "standarddosierung": "10–30 mg alle 4–6 Stunden, max. 120 mg",
+    "einheit": "Tablette",
+    "wirkstoff_pro_einheit": 10,
+    "einheit_menge": 1,
+    "teilbarkeit": [
+      1
+    ],
+    "hinweise": "Nach Bedarf mit Wasser einnehmen.",
+    "nahrung": "Alkohol vermeiden.",
+    "wechselwirkungen": "Sedativa, Antidepressiva",
+    "nebenwirkungen": "Verstopfung",
+    "einnahmeart": "schlucken",
+    "dosisintervall": "alle 4–6 Stunden",
+    "kategorie": "Starke Schmerzen",
+    "max_einnahmedauer": "nach Bedarf unter ärztlicher Aufsicht"
+  },
+  {
+    "name": "Pregabalin",
+    "wirkstoff": "Pregabalin",
+    "standarddosierung": "75–150 mg 2× täglich, max. 600 mg",
+    "einheit": "Kapsel",
+    "wirkstoff_pro_einheit": 75,
+    "einheit_menge": 1,
+    "teilbarkeit": [
+      1
+    ],
+    "hinweise": "Abends einnehmen.",
+    "nahrung": "Alkohol vermeiden.",
+    "wechselwirkungen": "Opioide, Benzodiazepine",
+    "nebenwirkungen": "Schwindel",
+    "einnahmeart": "schlucken",
+    "dosisintervall": "alle 12 Stunden",
+    "kategorie": "Nervenschmerzen",
+    "max_einnahmedauer": "Dauertherapie"
+  },
+  {
+    "name": "Diazepam",
+    "wirkstoff": "Diazepam",
+    "standarddosierung": "5–10 mg nach Bedarf, max. 30 mg",
+    "einheit": "Tablette",
+    "wirkstoff_pro_einheit": 5,
+    "einheit_menge": 1,
+    "teilbarkeit": [
+      0.5,
+      1
+    ],
+    "hinweise": "Im Mund auflösen oder mit Wasser einnehmen.",
+    "nahrung": "Alkohol vermeiden.",
+    "wechselwirkungen": "Opioide, Alkohol",
+    "nebenwirkungen": "Benommenheit",
+    "einnahmeart": "im Mund auflösen",
+    "dosisintervall": "alle 6–12 Stunden",
+    "kategorie": "Angst",
+    "max_einnahmedauer": "kurzfristige Anwendung"
+  },
+  {
+    "name": "Lorazepam",
+    "wirkstoff": "Lorazepam",
+    "standarddosierung": "1–2 mg nach Bedarf, max. 4 mg",
+    "einheit": "Tablette",
+    "wirkstoff_pro_einheit": 1,
+    "einheit_menge": 1,
+    "teilbarkeit": [
+      0.5,
+      1
+    ],
+    "hinweise": "Sublingual einnehmen.",
+    "nahrung": "Alkohol vermeiden.",
+    "wechselwirkungen": "Sedativa, Alkohol",
+    "nebenwirkungen": "Müdigkeit",
+    "einnahmeart": "sublingual",
+    "dosisintervall": "alle 6–8 Stunden",
+    "kategorie": "Angst",
+    "max_einnahmedauer": "kurzfristige Anwendung"
+  },
+  {
+    "name": "Warfarin",
+    "wirkstoff": "Warfarin",
+    "standarddosierung": "5 mg abends, individuell angepasst",
+    "einheit": "Tablette",
+    "wirkstoff_pro_einheit": 5,
+    "einheit_menge": 1,
+    "teilbarkeit": [
+      0.5,
+      1
+    ],
+    "hinweise": "Abends einnehmen, regelmäßig INR kontrollieren.",
+    "nahrung": "Vitamin-K-reiche Nahrung beachten.",
+    "wechselwirkungen": "NSAIDs, Antibiotika",
+    "nebenwirkungen": "Blutungsrisiko",
+    "einnahmeart": "schlucken",
+    "dosisintervall": "alle 24 Stunden",
+    "kategorie": "Blutverdünnung",
+    "max_einnahmedauer": "Dauertherapie"
+  },
+  {
+    "name": "Insulin",
+    "wirkstoff": "Insulin",
+    "standarddosierung": "individuell nach Blutzuckerwerten",
+    "einheit": "Injektion",
+    "wirkstoff_pro_einheit": 100,
+    "einheit_menge": 1,
+    "teilbarkeit": [
+      1
+    ],
+    "hinweise": "Zum Essen, täglich gleiche Uhrzeit.",
+    "nahrung": "Keine Wechselwirkung.",
+    "wechselwirkungen": "Betablocker, Alkohol",
+    "nebenwirkungen": "Hypoglykämie",
+    "einnahmeart": "subkutan",
+    "dosisintervall": "12–24 Stunden",
+    "kategorie": "Diabetes",
+    "max_einnahmedauer": "Dauertherapie"
+  },
+  {
+    "name": "Prednisolon",
+    "wirkstoff": "Prednisolon",
+    "standarddosierung": "5–60 mg morgens mit Essen",
+    "einheit": "Tablette",
+    "wirkstoff_pro_einheit": 5,
+    "einheit_menge": 1,
+    "teilbarkeit": [
+      0.5,
+      1
+    ],
+    "hinweise": "Morgens mit Frühstück einnehmen.",
+    "nahrung": "Keine besonderen Hinweise.",
+    "wechselwirkungen": "Blutverdünner, Diuretika",
+    "nebenwirkungen": "Gewichtszunahme",
+    "einnahmeart": "schlucken",
+    "dosisintervall": "alle 24 Stunden",
+    "kategorie": "Entzündung",
+    "max_einnahmedauer": "nach ärztlicher Anweisung"
+  },
+  {
+    "name": "Nitrolingual",
+    "wirkstoff": "Glyceryltrinitrat",
+    "standarddosierung": "0.4 mg bei Bedarf, max. 2 mg/Tag",
+    "einheit": "Spray",
+    "wirkstoff_pro_einheit": 0.4,
+    "einheit_menge": 1,
+    "teilbarkeit": [
+      1
+    ],
+    "hinweise": "Bei Bedarf sublingual anwenden.",
+    "nahrung": "Alkohol vermeiden.",
+    "wechselwirkungen": "PDE5-Hemmer, Blutdrucksenker",
+    "nebenwirkungen": "Kopfschmerzen",
+    "einnahmeart": "sublingual",
+    "dosisintervall": "alle 12 Stunden",
+    "kategorie": "Herz",
+    "max_einnahmedauer": "bei Bedarf"
+  },
+  {
+    "name": "Ambroxol",
+    "wirkstoff": "Ambroxol",
+    "standarddosierung": "30 mg 2–3× täglich, max. 120 mg",
+    "einheit": "Tablette",
+    "wirkstoff_pro_einheit": 30,
+    "einheit_menge": 1,
+    "teilbarkeit": [
+      1
+    ],
+    "hinweise": "Nach dem Essen einnehmen.",
+    "nahrung": "Keine Wechselwirkungen.",
+    "wechselwirkungen": "Antitussiva",
+    "nebenwirkungen": "Übelkeit",
+    "einnahmeart": "schlucken",
+    "dosisintervall": "alle 8 Stunden",
+    "kategorie": "Husten",
+    "max_einnahmedauer": "max. 7 Tage"
+  },
+  {
+    "name": "Ibuprofen Saft",
+    "wirkstoff": "Ibuprofen",
+    "standarddosierung": "100 mg/2ml, max. 30 mg/kg",
+    "einheit": "Saft",
+    "wirkstoff_pro_einheit": 100,
+    "einheit_menge": 2,
+    "teilbarkeit": [
+      1
+    ],
+    "hinweise": "Mit Tee oder Saft einnehmen.",
+    "nahrung": "Alkohol vermeiden.",
+    "wechselwirkungen": "Blutverdünner, SSRI",
+    "nebenwirkungen": "Magenbeschwerden",
+    "einnahmeart": "flüssig einnehmen",
+    "dosisintervall": "alle 6–8 Stunden",
+    "kategorie": "Kinder",
+    "max_einnahmedauer": "3 Tage ohne ärztlichen Rat"
   }
 ];
 
@@ -433,7 +627,40 @@ window.filterMeds = function () {
     });
 };
 
+
 window.calculateDosage = function () {
+  const medName = document.getElementById("med-dropdown").value;
+  const age = parseInt(document.getElementById("age").value);
+  const weight = parseFloat(document.getElementById("weight").value);
+  const med = medikamente.find(m => m.name === medName);
+  aktuellesMedikament = med;
+
+  let dosierung = med.standarddosierung;
+
+  // Optionale Berechnung für Gewichts-basierte Dosierungen (nur falls erforderlich)
+  if (med.name.toLowerCase().includes("saft") || med.name.toLowerCase().includes("zäpfchen")) {
+    if (weight && med.wirkstoff_pro_einheit && med.einheit_menge) {
+      const max_mg = weight * 10;
+      const ml_menge = (max_mg / med.wirkstoff_pro_einheit) * med.einheit_menge;
+      dosierung = `${ml_menge.toFixed(1)} ml (basierend auf ${max_mg} mg für ${weight} kg)`;
+    }
+  }
+
+  document.getElementById("empf-dosierung").textContent = dosierung;
+  document.getElementById("wirkstoff").textContent = med.wirkstoff;
+  document.getElementById("std-dosierung").textContent = med.standarddosierung;
+  document.getElementById("hinweise").textContent = med.hinweise;
+  document.getElementById("nahrung").textContent = med.nahrung;
+  document.getElementById("wechselwirkungen").textContent = med.wechselwirkungen;
+  document.getElementById("nebenwirkungen").textContent = med.nebenwirkungen;
+  document.getElementById("einnahmeart").textContent = med.einnahmeart;
+  document.getElementById("dosisintervall").textContent = med.dosisintervall;
+  document.getElementById("kategorie").textContent = med.kategorie;
+  document.getElementById("max-einnahmedauer").textContent = med.max_einnahmedauer;
+  document.getElementById("reminder-hinweis").textContent =
+    "Hinweis: Die Dosierungsanzeige ist vereinfacht und ersetzt keine ärztliche Beratung.";
+};
+
   const medName = document.getElementById("med-dropdown").value;
   const med = medikamente.find(m => m.name === medName);
   aktuellesMedikament = med;
