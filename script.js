@@ -828,15 +828,30 @@ window.calculateDosage = function () {
 
   let dosierung = med.standarddosierung;
 
-  // Optionale Berechnung für Gewichts-basierte Dosierungen (nur falls erforderlich)
-  if (med.name.toLowerCase().includes("saft") || med.name.toLowerCase().includes("zäpfchen")) {
-    if (weight && med.wirkstoff_pro_einheit && med.einheit_menge) {
-      const max_mg = weight * 10;
-      const ml_menge = (max_mg / med.wirkstoff_pro_einheit) * med.einheit_menge;
-      dosierung = `${ml_menge.toFixed(1)} ml (basierend auf ${max_mg} mg für ${weight} kg)`;
+  // Ibuprofen altersabhängig (z. B. 10 mg/kg bei Kindern, max 400 mg Erwachsene)
+  if (med.name.toLowerCase().includes("ibuprofen") && weight) {
+    let zielDosisMg = Math.min(10 * weight, 400);  // Kinder: 10 mg/kg, max 400 mg
+    const einheiten = zielDosisMg / med.wirkstoff_pro_einheit;
+
+    if (med.einheit === "Tablette") {
+      if (einheiten <= 0.25) dosierung = "¼ Tablette";
+      else if (einheiten <= 0.5) dosierung = "½ Tablette";
+      else if (einheiten <= 0.75) dosierung = "¾ Tablette";
+      else dosierung = `${Math.round(einheiten)} Tablette(n)`;
+    } else if (med.einheit === "Saft") {
+      const ml = (zielDosisMg / med.wirkstoff_pro_einheit) * med.einheit_menge;
+      dosierung = `${ml.toFixed(1)} ml (entspricht ca. ${zielDosisMg} mg)`;
     }
   }
 
+  // Paracetamol rektal (z. B. Zäpfchen) – 15 mg/kg
+  if (med.name.toLowerCase().includes("zäpfchen") && weight) {
+    const zielDosisMg = Math.round(weight * 15);
+    const einheiten = zielDosisMg / med.wirkstoff_pro_einheit;
+    dosierung = einheiten <= 0.5 ? "½ Zäpfchen" : einheiten <= 1 ? "1 Zäpfchen" : `${Math.round(einheiten)} Zäpfchen`;
+  }
+
+  // Standardanzeige
   document.getElementById("empf-dosierung").textContent = dosierung;
   document.getElementById("wirkstoff").textContent = med.wirkstoff;
   document.getElementById("std-dosierung").textContent = med.standarddosierung;
