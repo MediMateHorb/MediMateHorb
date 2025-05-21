@@ -827,32 +827,43 @@ window.calculateDosage = function () {
   aktuellesMedikament = med;
 
   let dosierung = med.standarddosierung;
+  let zusatz = "";
 
-  // Ibuprofen altersabhängig (z. B. 10 mg/kg bei Kindern, max 400 mg Erwachsene)
-  if (med.name.toLowerCase().includes("ibuprofen") && weight) {
-    let zielDosisMg = Math.min(10 * weight, 400);  // Kinder: 10 mg/kg, max 400 mg
-    const einheiten = zielDosisMg / med.wirkstoff_pro_einheit;
+  if (weight && med.wirkstoff_pro_einheit > 0) {
+    let zieldosis = 0;
 
-    if (med.einheit === "Tablette") {
-      if (einheiten <= 0.25) dosierung = "¼ Tablette";
-      else if (einheiten <= 0.5) dosierung = "½ Tablette";
-      else if (einheiten <= 0.75) dosierung = "¾ Tablette";
-      else dosierung = `${Math.round(einheiten)} Tablette(n)`;
-    } else if (med.einheit === "Saft") {
-      const ml = (zielDosisMg / med.wirkstoff_pro_einheit) * med.einheit_menge;
-      dosierung = `${ml.toFixed(1)} ml (entspricht ca. ${zielDosisMg} mg)`;
+    // Alters-/Gewichtsanpassung für bestimmte Medikamente
+    if (med.wirkstoff.toLowerCase().includes("ibuprofen")) {
+      zieldosis = Math.min(10 * weight, 400); // 10mg/kg max 400
+    } else if (med.wirkstoff.toLowerCase().includes("paracetamol")) {
+      zieldosis = Math.min(15 * weight, 1000); // 15mg/kg max 1000
+    } else if (med.wirkstoff.toLowerCase().includes("diclofenac")) {
+      zieldosis = Math.min(2 * weight, 75); // grobe Richtlinie
+    }
+
+    if (zieldosis > 0) {
+      const einheiten = zieldosis / med.wirkstoff_pro_einheit;
+
+      if (med.einheit === "Tablette") {
+        if (einheiten <= 0.25) dosierung = "¼ Tablette";
+        else if (einheiten <= 0.5) dosierung = "½ Tablette";
+        else if (einheiten <= 0.75) dosierung = "¾ Tablette";
+        else dosierung = `${Math.round(einheiten)} Tablette(n)`;
+
+        zusatz = ` (${Math.round(zieldosis)} mg empfohlen bei ${weight} kg)`;
+      }
+
+      if (med.einheit === "Saft" || med.einheit === "Tropfen") {
+        const ml = (zieldosis / med.wirkstoff_pro_einheit) * med.einheit_menge;
+        dosierung = `${ml.toFixed(1)} ml`;
+        zusatz = ` (${Math.round(zieldosis)} mg empfohlen bei ${weight} kg)`;
+      }
     }
   }
 
-  // Paracetamol rektal (z. B. Zäpfchen) – 15 mg/kg
-  if (med.name.toLowerCase().includes("zäpfchen") && weight) {
-    const zielDosisMg = Math.round(weight * 15);
-    const einheiten = zielDosisMg / med.wirkstoff_pro_einheit;
-    dosierung = einheiten <= 0.5 ? "½ Zäpfchen" : einheiten <= 1 ? "1 Zäpfchen" : `${Math.round(einheiten)} Zäpfchen`;
-  }
+  intervallInStunden = parseInt(med.dosisintervall) || 6;
 
-  // Standardanzeige
-  document.getElementById("empf-dosierung").textContent = dosierung;
+  document.getElementById("empf-dosierung").textContent = dosierung + zusatz;
   document.getElementById("wirkstoff").textContent = med.wirkstoff;
   document.getElementById("std-dosierung").textContent = med.standarddosierung;
   document.getElementById("hinweise").textContent = med.hinweise;
@@ -870,30 +881,37 @@ window.calculateDosage = function () {
 
 window.confirmIntake = async function () {
   const jetzt = new Date();
-  const naechsteEinnahme = new Date(jetzt.getTime() + (intervallInStunden * 60 * 60 * 1000));
+  const stdIntervall = parseInt(aktuellesMedikament.dosisintervall) || 6;
+  const naechsteEinnahme = new Date(jetzt.getTime() + (stdIntervall - 1) * 60 * 60 * 1000);
   const uhrzeit = naechsteEinnahme.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   document.getElementById("reminder-status").textContent = `Du wirst um ${uhrzeit} an die nächste Einnahme erinnert.`;
 
-  const { data: { user }, error } = await supabaseClient.auth.getUser();
-  if (!user) return alert("Nicht eingeloggt.");
-  const email = user.email;
+  const { data, error } = await supabase.auth.getUser();
+  if (!data?.user) return alert('Nicht eingeloggt.');
+  const email = data.user.email;
 
-  await fetch(`${SUPABASE_URL}/rest/v1/reminders`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "apikey": SUPABASE_KEY,
-      "Authorization": "Bearer " + SUPABASE_KEY
-    },
-    body: JSON.stringify({
-      user_id: user.id,
-      user_email: email,
-      med_name: aktuellesMedikament.name,
-      next_time: naechsteEinnahme.toISOString(),
-      interval_h: intervallInStunden,
-      reminded: false
-    })
-  });
+  try {
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/reminders`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": SUPABASE_KEY,
+        "Authorization": "Bearer " + SUPABASE_KEY
+      },
+      body: JSON.stringify({
+        user_id: data.user.id,
+        user_email: email,
+        med_name: aktuellesMedikament.name,
+        next_time: naechsteEinnahme.toISOString(),
+        interval_h: stdIntervall,
+        reminded: false
+      })
+    });
 
-  document.getElementById("reminder-feedback").textContent = "Erinnerung erfolgreich gespeichert.";
+    if (!response.ok) throw new Error("Fehler beim Speichern des Reminders.");
+    document.getElementById("reminder-feedback").textContent = "Erinnerung erfolgreich gespeichert.";
+  } catch (error) {
+    console.error(error);
+    document.getElementById("reminder-feedback").textContent = "Fehler beim Speichern der Erinnerung.";
+  }
 };
