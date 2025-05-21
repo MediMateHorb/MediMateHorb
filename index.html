@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediMateHorb - Dein Medikamentenassistent</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header>
+      <img src="logo.png" alt="MediMateHorb Logo" class="logo">
+      <h1>MediMateHorb - Dein Medikamentenassistent</h1>
+    </header>
+
+    <section id="login-section">
+      <h2>Login</h2>
+      <input type="email" id="email" placeholder="Email">
+      <input type="password" id="password" placeholder="Passwort">
+      <button onclick="login()">Login</button>
+    </section>
+
+    <section id="main-section" style="display:none">
+      <h2>Medikamentenplan erstellen</h2>
+      <input type="text" id="search-med" placeholder="Medikament suchen..." oninput="filterMeds()">
+      <select id="med-dropdown"></select>
+
+      <h3>Patientendaten</h3>
+      <input type="number" id="age" placeholder="Alter in Jahren">
+      <input type="number" id="weight" placeholder="Gewicht in kg">
+      <button onclick="calculateDosage()">Dosierung berechnen</button>
+
+      <div id="results">
+        <h3>Ergebnisse</h3>
+        <p><strong>Empfohlene Dosierung:</strong> <span id="empf-dosierung"></span></p>
+        <p><strong>Wirkstoff:</strong> <span id="wirkstoff"></span></p>
+        <p><strong>Standarddosierung:</strong> <span id="std-dosierung"></span></p>
+        <p><strong>Einnahmehinweise:</strong> <span id="hinweise"></span></p>
+        <p><strong>Unverträgliche Nahrung:</strong> <span id="nahrung"></span></p>
+        <p><strong>Wechselwirkungen:</strong> <span id="wechselwirkungen"></span></p>
+        <p><strong>Nebenwirkungen:</strong> <span id="nebenwirkungen"></span></p>
+        <p><strong>Einnahmeart:</strong> <span id="einnahmeart"></span></p>
+        <p><strong>Dosisintervall:</strong> <span id="dosisintervall"></span></p>
+        <p><strong>Kategorie:</strong> <span id="kategorie"></span></p>
+        <p><strong>Maximale Einnahmedauer:</strong> <span id="max-einnahmedauer"></span></p>
+      </div>
+
+      <h3>Einnahme bestätigen</h3>
+      <button onclick="confirmIntake()">Einnahme jetzt bestätigen</button>
+      <p id="reminder-status"></p>
+      <p id="reminder-feedback"></p>
+
+      <p id="reminder-hinweis">
+        Hinweis: Die Dosierungsberechnung ist vereinfacht und berücksichtigt nicht alle individuellen Faktoren. Für eine genaue Dosierungsempfehlung sollte stets ein Arzt oder Apotheker konsultiert werden.
+      </p>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
