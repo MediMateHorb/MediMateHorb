@@ -1,3 +1,35 @@
+
+const SUPABASE_URL = "https://qodjghrxucatvgvamdvu.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFvZGpnaHJ4dWNhdHZndmFtZHZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc4MzM0NTYsImV4cCI6MjA2MzQwOTQ1Nn0.DpMR66cpC57FCWA2Cs-drgOKuvjmBnTqarg2KPDWHcw";
+
+const { createClient } = supabase;
+const supabaseClient = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+
+window.login = async function () {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+  if (error) {
+    alert("Login fehlgeschlagen: " + error.message);
+    return;
+  }
+  document.getElementById("login-section").style.display = "none";
+  document.getElementById("main-section").style.display = "block";
+  filterMeds();
+};
+
+window.signup = async function () {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const { data, error } = await supabaseClient.auth.signUp({ email, password });
+  if (error) {
+    alert("Registrierung fehlgeschlagen: " + error.message);
+    return;
+  }
+  alert("Registrierung erfolgreich! Bitte E-Mail-Adresse bestätigen.");
+};
+
 const medikamente = [
   {
     "name": "Ibuprofen 400",
