@@ -6,24 +6,7 @@ const { createClient } = supabase;
 const supabaseClient = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 window.login = async function () {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-  const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
-  if (error) {
-    alert("Login fehlgeschlagen: " + error.message);
-    return;
-  }
-  document.getElementById("login-section").style.display = "none";
-  document.getElementById("main-section").style.display = "block";
-  filterMeds();
-};
-
-window.signup = async function () {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-  const { data, error } = await supabaseClient.auth.signUp({ email, password });
-  if (error) {
-    alert("Registrierung fehlgeschlagen: " + error.message);
+ 
     return;
   }
   alert("Registrierung erfolgreich! Bitte E-Mail-Adresse bestätigen.");
