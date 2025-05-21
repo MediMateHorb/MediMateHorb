@@ -1032,3 +1032,19 @@ const medikamente = [
     "max_einnahmedauer": "7 Tage"
   }
 ];
+
+
+
+window.filterMeds = function () {
+  const search = document.getElementById("search-med").value.toLowerCase();
+  const dropdown = document.getElementById("med-dropdown");
+  dropdown.innerHTML = "";
+  medikamente
+    .filter(m => m.name.toLowerCase().includes(search))
+    .forEach(med => {
+      const option = document.createElement("option");
+      option.value = med.name;
+      option.textContent = med.name;
+      dropdown.appendChild(option);
+    });
+};
