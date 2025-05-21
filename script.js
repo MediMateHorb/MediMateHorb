@@ -610,6 +610,101 @@ const medikamente = [
     "dosisintervall": "alle 6–8 Stunden",
     "kategorie": "Kinder",
     "max_einnahmedauer": "3 Tage ohne ärztlichen Rat"
+  },
+  {
+    "name": "Paracetamol Zäpfchen",
+    "wirkstoff": "Paracetamol",
+    "standarddosierung": "125 mg rektal, max. 60 mg/kg",
+    "einheit": "Zäpfchen",
+    "wirkstoff_pro_einheit": 125,
+    "einheit_menge": 1,
+    "teilbarkeit": [
+      1
+    ],
+    "hinweise": "Rektal verabreichen.",
+    "nahrung": "Keine",
+    "wechselwirkungen": "Leberenzyme-induzierende Medikamente",
+    "nebenwirkungen": "Lebertoxizität",
+    "einnahmeart": "rektal",
+    "dosisintervall": "alle 6–8 Stunden",
+    "kategorie": "Kinder",
+    "max_einnahmedauer": "3 Tage"
+  },
+  {
+    "name": "Fenistil",
+    "wirkstoff": "Dimetinden",
+    "standarddosierung": "1 mg abends, max. 3 mg",
+    "einheit": "Tropfen",
+    "wirkstoff_pro_einheit": 1,
+    "einheit_menge": 20,
+    "teilbarkeit": [
+      1
+    ],
+    "hinweise": "Abends einnehmen.",
+    "nahrung": "Alkohol vermeiden.",
+    "wechselwirkungen": "Sedativa, Alkohol",
+    "nebenwirkungen": "Müdigkeit",
+    "einnahmeart": "tropfen oder schlucken",
+    "dosisintervall": "alle 8 Stunden",
+    "kategorie": "Allergie",
+    "max_einnahmedauer": "nach ärztlicher Anweisung"
+  },
+  {
+    "name": "ACC Hustensaft",
+    "wirkstoff": "Acetylcystein",
+    "standarddosierung": "200 mg 3× täglich, max. 600 mg",
+    "einheit": "Saft",
+    "wirkstoff_pro_einheit": 200,
+    "einheit_menge": 5,
+    "teilbarkeit": [
+      1
+    ],
+    "hinweise": "Mit viel Wasser einnehmen.",
+    "nahrung": "Keine",
+    "wechselwirkungen": "Nitroglycerin, Hustenstiller",
+    "nebenwirkungen": "Übelkeit",
+    "einnahmeart": "schlucken",
+    "dosisintervall": "alle 8 Stunden",
+    "kategorie": "Husten",
+    "max_einnahmedauer": "5 Tage"
+  },
+  {
+    "name": "Sab Simplex",
+    "wirkstoff": "Simeticon",
+    "standarddosierung": "40 mg vor jeder Mahlzeit, max. 120 mg",
+    "einheit": "Tropfen",
+    "wirkstoff_pro_einheit": 40,
+    "einheit_menge": 15,
+    "teilbarkeit": [
+      1
+    ],
+    "hinweise": "Vor dem Fläschchen geben.",
+    "nahrung": "Keine",
+    "wechselwirkungen": "Keine bekannt",
+    "nebenwirkungen": "Keine bekannt",
+    "einnahmeart": "tropfen",
+    "dosisintervall": "alle 6–8 Stunden",
+    "kategorie": "Blähungen",
+    "max_einnahmedauer": "nach Bedarf"
+  },
+  {
+    "name": "Vomex",
+    "wirkstoff": "Dimenhydrinat",
+    "standarddosierung": "20–40 mg vor Reisen, max. 80 mg",
+    "einheit": "Tablette",
+    "wirkstoff_pro_einheit": 20,
+    "einheit_menge": 1,
+    "teilbarkeit": [
+      1
+    ],
+    "hinweise": "Kurz vor Reise einnehmen.",
+    "nahrung": "Alkohol vermeiden.",
+    "wechselwirkungen": "Sedativa, Alkohol",
+    "nebenwirkungen": "Müdigkeit",
+    "einnahmeart": "schlucken",
+    "dosisintervall": "alle 8 Stunden",
+    "kategorie": "Reiseübelkeit",
+    "max_einnahmedauer": "nach Bedarf"
   }
 ];
 
