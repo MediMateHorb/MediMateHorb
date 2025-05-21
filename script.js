@@ -705,6 +705,102 @@ const medikamente = [
     "dosisintervall": "alle 8 Stunden",
     "kategorie": "Reiseübelkeit",
     "max_einnahmedauer": "nach Bedarf"
+  },
+  {
+    "name": "Nasivin Kinder",
+    "wirkstoff": "Oxymetazolin",
+    "standarddosierung": "1–2 Tropfen 0,025% 2× täglich",
+    "einheit": "Nasenspray",
+    "wirkstoff_pro_einheit": 0.025,
+    "einheit_menge": 1,
+    "teilbarkeit": [
+      1
+    ],
+    "hinweise": "Nur kurzzeitig anwenden.",
+    "nahrung": "Keine",
+    "wechselwirkungen": "MAO-Hemmer, Blutdruckmittel",
+    "nebenwirkungen": "Nasentrockenheit",
+    "einnahmeart": "nasal",
+    "dosisintervall": "alle 12 Stunden",
+    "kategorie": "Kinder",
+    "max_einnahmedauer": "max. 5 Tage"
+  },
+  {
+    "name": "Dentinox",
+    "wirkstoff": "Lidocain",
+    "standarddosierung": "nach Bedarf, geringe Menge",
+    "einheit": "Gel",
+    "wirkstoff_pro_einheit": 0,
+    "einheit_menge": 1,
+    "teilbarkeit": [
+      1
+    ],
+    "hinweise": "Bei Zahnungsschmerzen lokal auftragen.",
+    "nahrung": "Keine",
+    "wechselwirkungen": "Keine",
+    "nebenwirkungen": "Allergische Reaktionen",
+    "einnahmeart": "lokal auf Zahnfleisch",
+    "dosisintervall": "alle 6–8 Stunden",
+    "kategorie": "Kinder",
+    "max_einnahmedauer": "nach Bedarf"
+  },
+  {
+    "name": "Bepanthen",
+    "wirkstoff": "Dexpanthenol",
+    "standarddosierung": "nach Bedarf, äußerlich anwenden",
+    "einheit": "Creme",
+    "wirkstoff_pro_einheit": 0,
+    "einheit_menge": 1,
+    "teilbarkeit": [
+      1
+    ],
+    "hinweise": "Auf die Haut auftragen.",
+    "nahrung": "Keine",
+    "wechselwirkungen": "Keine",
+    "nebenwirkungen": "Hautreizung",
+    "einnahmeart": "auftragen",
+    "dosisintervall": "alle 12 Stunden",
+    "kategorie": "Haut",
+    "max_einnahmedauer": "nach Bedarf"
+  },
+  {
+    "name": "L-Thyroxin",
+    "wirkstoff": "Levothyroxin",
+    "standarddosierung": "50 µg täglich, max. 200 µg",
+    "einheit": "Tablette",
+    "wirkstoff_pro_einheit": 50,
+    "einheit_menge": 1,
+    "teilbarkeit": [
+      0.5,
+      1
+    ],
+    "hinweise": "Morgens nüchtern einnehmen.",
+    "nahrung": "Soja vermeiden.",
+    "wechselwirkungen": "Eisen, Kalzium",
+    "nebenwirkungen": "Schlaflosigkeit",
+    "einnahmeart": "schlucken",
+    "dosisintervall": "alle 24 Stunden",
+    "kategorie": "Schilddrüse",
+    "max_einnahmedauer": "Dauertherapie"
+  },
+  {
+    "name": "Thomapyrin",
+    "wirkstoff": "Acetylsalicylsäure + Paracetamol + Coffein",
+    "standarddosierung": "1 Tablette bei Bedarf, max. 3× täglich",
+    "einheit": "Tablette",
+    "wirkstoff_pro_einheit": 250,
+    "einheit_menge": 1,
+    "teilbarkeit": [
+      1
+    ],
+    "hinweise": "Mit Wasser nach dem Essen einnehmen.",
+    "nahrung": "Alkohol vermeiden.",
+    "wechselwirkungen": "Blutverdünner, Sedativa",
+    "nebenwirkungen": "Magenreizungen",
+    "einnahmeart": "schlucken",
+    "dosisintervall": "alle 6–8 Stunden",
+    "kategorie": "Schmerzen",
+    "max_einnahmedauer": "4 Tage"
   }
 ];
 
@@ -739,41 +835,6 @@ window.calculateDosage = function () {
   document.getElementById("max-einnahmedauer").textContent = med.max_einnahmedauer;
   document.getElementById("reminder-hinweis").textContent =
     "Hinweis: Die Dosierungsanzeige ist vereinfacht und ersetzt keine ärztliche Beratung.";
-};
-
-
-window.filterMeds = function () {
-  const search = document.getElementById("search-med").value.toLowerCase();
-  const dropdown = document.getElementById("med-dropdown");
-  dropdown.innerHTML = "";
-  medikamente
-    .filter(m => m.name.toLowerCase().includes(search))
-    .forEach(med => {
-      const option = document.createElement("option");
-      option.value = med.name;
-      option.textContent = med.name;
-      dropdown.appendChild(option);
-    });
-};
-
-// ersetzt
-  const medName = document.getElementById("med-dropdown").value;
-  const med = medikamente.find(m => m.name === medName);
-  aktuellesMedikament = med;
-
-  document.getElementById("empf-dosierung").textContent = med.standarddosierung;
-  document.getElementById("wirkstoff").textContent = med.wirkstoff;
-  document.getElementById("std-dosierung").textContent = med.standarddosierung;
-  document.getElementById("hinweise").textContent = med.hinweise;
-  document.getElementById("nahrung").textContent = med.nahrung;
-  document.getElementById("wechselwirkungen").textContent = med.wechselwirkungen;
-  document.getElementById("nebenwirkungen").textContent = med.nebenwirkungen;
-  document.getElementById("einnahmeart").textContent = med.einnahmeart;
-  document.getElementById("dosisintervall").textContent = med.dosisintervall;
-  document.getElementById("kategorie").textContent = med.kategorie;
-  document.getElementById("max-einnahmedauer").textContent = med.max_einnahmedauer;
-  document.getElementById("reminder-hinweis").textContent =
-    "Hinweis: Die Dosierungsberechnung ist vereinfacht und ersetzt keine ärztliche Beratung.";
 };
 
 
