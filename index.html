@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MediMateHorb - Dein Medikamentenassistent</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 </head>
 <body>
   <div id="app">
@@ -18,6 +19,7 @@
       <input type="email" id="email" placeholder="Email">
       <input type="password" id="password" placeholder="Passwort">
       <button onclick="login()">Login</button>
+      <button onclick="signup()">Registrieren</button>
     </section>
 
     <section id="main-section" style="display:none">
