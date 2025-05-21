@@ -84,13 +84,15 @@ function confirmIntake() {
   document.getElementById("reminder-status").textContent = `Du wirst um ${uhrzeit} an die nächste Einnahme erinnert.`;
 
   // Beispiel statische Email
-  const email = document.getElementById("email").value || "test@example.com";
+  const {{ data: {{ user }} }} = await supabase.auth.getUser();
+  if (!user) return alert('Nicht eingeloggt.');
+  const email = user.email;
 
-  sendReminderToSupabase(email, aktuellesMedikament.name, naechsteEinnahme.toISOString(), intervallInStunden);
+  sendReminderToSupabase(user.id, email, aktuellesMedikament.name, naechsteEinnahme.toISOString(), intervallInStunden);
 }
 
 
-async function sendReminderToSupabase(email, medName, nextTime, intervalH) {
+async function sendReminderToSupabase(userId, email, medName, nextTime, intervalH) {
   const SUPABASE_URL = "https://qodjghrxucatvgvamdvu.supabase.co";
   const API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFvZGpnaHJ4dWNhdHZndmFtZHZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc4MzM0NTYsImV4cCI6MjA2MzQwOTQ1Nn0.DpMR66cpC57FCWA2Cs-drgOKuvjmBnTqarg2KPDWHcw";
 
@@ -103,6 +105,7 @@ async function sendReminderToSupabase(email, medName, nextTime, intervalH) {
         "Authorization": "Bearer " + API_KEY
       },
       body: JSON.stringify({
+        user_id: userId,
         user_email: email,
         med_name: medName,
         next_time: nextTime,
