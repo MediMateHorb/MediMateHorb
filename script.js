@@ -506,77 +506,45 @@ window.calculateDosage = function () {
   const med = medikamente.find(m => m.name === medName);
   aktuellesMedikament = med;
 
-  let dosierung = med.standarddosierung;
+  let dosierung = med.standarddosierung || "";
   let zusatz = "";
 
-  if (med.wirkstoff.toLowerCase().includes("ibuprofen") && !isNaN(weight)) {
-    if (weight >= 20 && weight <= 29) {
-      dosierung = "½ Tablette (200 mg)";
-      zusatz = " max. 1½ Tabletten (600 mg) pro Tag";
-    } else if (weight >= 30 && weight <= 39) {
-      dosierung = "½ Tablette (200 mg)";
-      zusatz = " max. 2 Tabletten (800 mg) pro Tag";
-    } else if (weight >= 40) {
-      dosierung = "½ bis 1 Tablette (200–400 mg)";
-      zusatz = " max. 3 Tabletten (1200 mg) pro Tag";
-    } else {
-      dosierung = "Nicht empfohlen für < 20 kg";
-    }
-  } else if (med.wirkstoff.toLowerCase().includes("paracetamol") && med.wirkstoff_pro_einheit === 500 && !isNaN(weight)) {
-    if (weight >= 17 && weight <= 25) {
-      dosierung = "½ Tablette (250 mg)";
-      zusatz = " max. 2 Tabletten (1000 mg) pro Tag";
-    } else if (weight >= 26 && weight <= 32) {
-      dosierung = "½ Tablette (250 mg)";
-      zusatz = " max. 2–3 Tabletten (1000–1500 mg) pro Tag";
-    } else if (weight >= 33 && weight <= 43) {
-      dosierung = "1 Tablette (500 mg)";
-      zusatz = " max. 4 Tabletten (2000 mg) pro Tag";
-    } else if (weight > 43) {
-      dosierung = "1–2 Tabletten (500–1000 mg)";
-      zusatz = " max. 8 Tabletten (4000 mg) pro Tag";
-    } else {
-      dosierung = "Nicht empfohlen für < 17 kg";
-    }
-  } else if (med.wirkstoff.toLowerCase().includes("acetylsalicylsäure") && !isNaN(age)) {
-    if (age >= 12 && age <= 15 && weight >= 40 && weight <= 50) {
-      dosierung = "1 Tablette (500 mg)";
-      zusatz = " max. 6 Tabletten (3000 mg) pro Tag";
-    } else if (age >= 16 && age < 65) {
-      dosierung = "1–2 Tabletten (500–1000 mg)";
-      zusatz = " max. 6 Tabletten (3000 mg) pro Tag";
-    } else if (age >= 65) {
-      dosierung = "1 Tablette (500 mg)";
-      zusatz = " max. 4 Tabletten (2000 mg) pro Tag";
-    } else {
-      dosierung = "Nicht empfohlen für Kinder unter 12 Jahren";
-    }
-  } else if (med.wirkstoff.toLowerCase().includes("omeprazol") && !isNaN(weight) && !isNaN(age)) {
-    if (age < 1 && weight >= 10 && weight <= 20) {
-      dosierung = "10 mg täglich";
-      zusatz = " max. 20 mg pro Tag";
-    } else if (age >= 1 && weight > 20 && age < 4) {
-      dosierung = "20 mg täglich";
-      zusatz = " max. 40 mg pro Tag";
-    } else if (age >= 4 && weight >= 15 && weight <= 30) {
-      dosierung = "10 mg täglich (mit Antibiotika)";
-    } else if (age >= 4 && weight > 30) {
-      dosierung = "20 mg täglich (mit Antibiotika)";
-    } else if (age >= 18) {
-      dosierung = "20 mg täglich, ggf. anpassen";
-      zusatz = " 10–40 mg üblich, bis zu 120 mg";
-    }
-  } else if (med.wirkstoff.toLowerCase().includes("metformin") && !isNaN(age)) {
-    if (age >= 10 && age < 18) {
-      dosierung = "500–850 mg 1× täglich";
-      zusatz = " max. 2000 mg/Tag in 2–3 Dosen";
-    } else if (age >= 18) {
-      dosierung = "500–850 mg 2–3× täglich";
-      zusatz = " max. 3000 mg/Tag";
-    }
+  if (!med || !med.wirkstoff) return;
+
+  const w = med.wirkstoff.toLowerCase();
+
+  if (w.includes("ibuprofen") && weight) {
+    if (weight >= 20 && weight <= 29) dosierung = "½ Tablette (200 mg)";
+    else if (weight >= 30 && weight <= 39) dosierung = "½ Tablette (200 mg)";
+    else if (weight >= 40) dosierung = "½–1 Tablette (200–400 mg)";
+    else dosierung = "Nicht empfohlen für < 20 kg";
+  } else if (w.includes("paracetamol") && weight) {
+    if (weight >= 17 && weight <= 25) dosierung = "½ Tablette (250 mg)";
+    else if (weight >= 26 && weight <= 32) dosierung = "½ Tablette (250 mg)";
+    else if (weight >= 33 && weight <= 43) dosierung = "1 Tablette (500 mg)";
+    else if (weight > 43) dosierung = "1–2 Tabletten (500–1000 mg)";
+    else dosierung = "Nicht empfohlen für < 17 kg";
+  } else if (w.includes("acetylsalicylsäure") && age) {
+    if (age >= 12 && age <= 15 && weight >= 40 && weight <= 50) dosierung = "1 Tablette (500 mg)";
+    else if (age >= 16 && age < 65) dosierung = "1–2 Tabletten (500–1000 mg)";
+    else if (age >= 65) dosierung = "1 Tablette (500 mg)";
+    else dosierung = "Nicht empfohlen für < 12 Jahren";
+  } else if (w.includes("acetylcystein") && age) {
+    if (age >= 2 && age <= 5) dosierung = "5 ml 2–3× täglich (200–300 mg)";
+    else if (age >= 6 && age <= 14) dosierung = "10 ml 2× täglich (400 mg)";
+    else if (age >= 15) dosierung = "10 ml 3× täglich (600 mg)";
+    else dosierung = "Nicht empfohlen für < 2 Jahre";
+  } else if (w.includes("ambroxol") && age) {
+    if (age < 2) dosierung = "15 mg/Tag in 2 Dosen";
+    else if (age >= 2 && age <= 5) dosierung = "22,5 mg/Tag in 2 Dosen";
+    else if (age >= 6 && age < 12) dosierung = "30–45 mg/Tag in 2–3 Dosen";
+    else if (age >= 12) dosierung = "Erst 90 mg/Tag, dann 60 mg/Tag";
+  } else if (w.includes("amoxicillin") && weight) {
+    if (weight < 40) dosierung = "Dosis muss individuell angepasst werden (< 40 kg)";
+    else dosierung = "250–500 mg alle 8 h, ggf. 750–1000 mg";
   }
 
-  document.getElementById("empf-dosierung").textContent = dosierung + zusatz;
+  document.getElementById("empf-dosierung").textContent = dosierung + (zusatz || "");
   document.getElementById("wirkstoff").textContent = med.wirkstoff;
   document.getElementById("std-dosierung").textContent = med.standarddosierung;
   document.getElementById("hinweise").textContent = med.hinweise;
@@ -587,39 +555,7 @@ window.calculateDosage = function () {
   document.getElementById("dosisintervall").textContent = med.dosisintervall;
   document.getElementById("kategorie").textContent = med.kategorie;
   document.getElementById("max-einnahmedauer").textContent = med.max_einnahmedauer;
-  else if (med.wirkstoff.toLowerCase().includes("acetylcystein") && !isNaN(age)) {
-      if (age >= 2 && age <= 5) {
-        dosierung = "5 ml 2–3× täglich";
-        zusatz = " = 200–300 mg/Tag";
-      } else if (age >= 6 && age <= 14) {
-        dosierung = "10 ml 2× täglich";
-        zusatz = " = 400 mg/Tag";
-      } else if (age >= 15) {
-        dosierung = "10 ml 3× täglich";
-        zusatz = " = 600 mg/Tag";
-      } else {
-        dosierung = "Nicht empfohlen für < 2 Jahre";
-      }
-    }
-    else if (med.wirkstoff.toLowerCase().includes("ambroxol") && !isNaN(age)) {
-      if (age < 2) {
-        dosierung = "15 mg/Tag in 2 Dosen";
-      } else if (age >= 2 && age <= 5) {
-        dosierung = "22,5 mg/Tag in 2 Dosen";
-      } else if (age >= 6 && age < 12) {
-        dosierung = "30–45 mg/Tag in 2–3 Dosen";
-      } else if (age >= 12) {
-        dosierung = "Erst 90 mg/Tag (2–3 Dosen), dann 60 mg/Tag in 2 Dosen";
-      }
-    }
-    else if (med.wirkstoff.toLowerCase().includes("amoxicillin") && !isNaN(weight)) {
-      if (weight < 40) {
-        dosierung = "Dosis muss individuell nach Gewicht angepasst werden (< 40 kg)";
-      } else {
-        dosierung = "250–500 mg alle 8 Stunden, ggf. 750–1000 mg bei schweren Infektionen";
-      }
-    }
-    document.getElementById("reminder-hinweis").textContent =
+  document.getElementById("reminder-hinweis").textContent = 
     "Hinweis: Die Dosierungsanzeige ist vereinfacht und ersetzt keine ärztliche Beratung.";
 };
 
