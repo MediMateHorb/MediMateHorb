@@ -302,27 +302,7 @@ const medikamente = [
       0.5
     ]
   },
-  {
-    "name": "Aspirin",
-    "wirkstoff": "Acetylsalicylsaeure",
-    "standarddosierung": "100 mg",
-    "max_tagesdosis": "3000 mg",
-    "hinweise": "Mit Wasser, nach dem Essen",
-    "nahrung": "Alkohol",
-    "wechselwirkungen": "Blutverduenner, NSAIDs",
-    "nebenwirkungen": "Magenblutungen",
-    "einnahmeart": "schlucken",
-    "dosisintervall": "8",
-    "kategorie": "Schmerzen",
-    "einheit": "Tablette",
-    "wirkstoff_pro_einheit": 100,
-    "einheit_menge": 1,
-    "teilbarkeit": [
-      1,
-      0.5
-    ]
-  },
-  {
+    {
     "name": "Omeprazol",
     "wirkstoff": "Omeprazol",
     "standarddosierung": "20 mg",
