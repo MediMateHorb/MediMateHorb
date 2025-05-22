@@ -68,27 +68,7 @@ const medikamente = [
     "kategorie": "Kinder",
     "max_einnahmedauer": "3 Tage"
   },
-  {
-    "name": "Diclofenac",
-    "wirkstoff": "Diclofenac",
-    "standarddosierung": "50 mg 2–3× täglich",
-    "einheit": "Tablette",
-    "wirkstoff_pro_einheit": 50,
-    "einheit_menge": 1,
-    "teilbarkeit": [
-      0.5,
-      1
-    ],
-    "hinweise": "Nach dem Essen mit Wasser.",
-    "nahrung": "Alkohol vermeiden.",
-    "wechselwirkungen": "Blutverdünner, Diuretika",
-    "nebenwirkungen": "Magenreizung",
-    "einnahmeart": "schlucken",
-    "dosisintervall": "8",
-    "kategorie": "Schmerzmittel",
-    "max_einnahmedauer": "5 Tage"
-  },
-  {
+    {
     "name": "Ambroxol",
     "wirkstoff": "Ambroxol",
     "standarddosierung": "30 mg 2–3× täglich",
