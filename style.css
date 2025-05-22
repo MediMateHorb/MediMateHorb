@@ -79,3 +79,31 @@ h1, h2, h3 {
   font-size: 0.9rem;
   color: #aa0000;
 }
+
+
+@media (max-width: 600px) {
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .logo {
+    width: 80px;
+    height: auto;
+    margin-bottom: 0.5rem;
+  }
+
+  .header-content h1 {
+    font-size: 1.4rem;
+  }
+
+  #app {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  input, select, button {
+    font-size: 0.95rem;
+    padding: 0.6rem;
+  }
+}
