@@ -30,6 +30,31 @@ window.signup = async function () {
   alert("Registrierung erfolgreich! Bitte E-Mail-Adresse bestätigen.");
 };
 
+
+window.login = async function () {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+  if (error) {
+    alert("Login fehlgeschlagen: " + error.message);
+    return;
+  }
+  document.getElementById("login-section").style.display = "none";
+  document.getElementById("main-section").style.display = "block";
+  filterMeds();
+};
+
+window.signup = async function () {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const { data, error } = await supabase.auth.signUp({ email, password });
+  if (error) {
+    alert("Registrierung fehlgeschlagen: " + error.message);
+    return;
+  }
+  alert("Registrierung erfolgreich! Bitte E-Mail-Adresse bestätigen.");
+};
+
 const medikamente = [
   {
     "name": "Ibuprofen 400",
@@ -263,6 +288,226 @@ const medikamente = [
     "dosisintervall": "8",
     "kategorie": "Husten",
     "max_einnahmedauer": "5 Tage ohne ärztlichen Rat"
+  },
+  {
+    "name": "Amoxicillin 500",
+    "wirkstoff": "Amoxicillin",
+    "standarddosierung": "250–500 mg alle 8 Stunden, bei schweren Infektionen 750–1000 mg",
+    "einheit": "Tablette",
+    "wirkstoff_pro_einheit": 500,
+    "einheit_menge": 1,
+    "teilbarkeit": [
+      1,
+      0.5
+    ],
+    "hinweise": "Kurz vor einer Mahlzeit einnehmen.",
+    "nahrung": "Nicht mit Milch einnehmen.",
+    "wechselwirkungen": "Methotrexat, Allopurinol",
+    "nebenwirkungen": "Durchfall, allergische Reaktionen",
+    "einnahmeart": "schlucken",
+    "dosisintervall": "8",
+    "kategorie": "Antibiotikum",
+    "max_einnahmedauer": "je nach Infektion, in der Regel 5–10 Tage"
+  },
+  {
+    "name": "Ibuprofen",
+    "wirkstoff": "Ibuprofen",
+    "standarddosierung": "400 mg",
+    "max_tagesdosis": "1200 mg",
+    "hinweise": "Nach dem Essen, mit Wasser",
+    "nahrung": "Alkohol",
+    "wechselwirkungen": "Blutverduenner, SSRI",
+    "nebenwirkungen": "Magenbeschwerden",
+    "einnahmeart": "schlucken",
+    "dosisintervall": "6-8",
+    "kategorie": "Schmerzen",
+    "einheit": "Tablette",
+    "wirkstoff_pro_einheit": 400,
+    "einheit_menge": 1,
+    "teilbarkeit": [
+      1,
+      0.5
+    ]
+  },
+  {
+    "name": "Paracetamol",
+    "wirkstoff": "Paracetamol",
+    "standarddosierung": "500 mg",
+    "max_tagesdosis": "4000 mg",
+    "hinweise": "Mit Wasser, nuechtern oder nach dem Essen",
+    "nahrung": "Alkohol",
+    "wechselwirkungen": "Leberenzyme-induzierende Medikamente",
+    "nebenwirkungen": "Lebertoxizitaet",
+    "einnahmeart": "schlucken",
+    "dosisintervall": "4-6",
+    "kategorie": "Schmerzen/Fieber",
+    "einheit": "Tablette",
+    "wirkstoff_pro_einheit": 500,
+    "einheit_menge": 1,
+    "teilbarkeit": [
+      1,
+      0.5
+    ]
+  },
+  {
+    "name": "Aspirin",
+    "wirkstoff": "Acetylsalicylsaeure",
+    "standarddosierung": "100 mg",
+    "max_tagesdosis": "3000 mg",
+    "hinweise": "Mit Wasser, nach dem Essen",
+    "nahrung": "Alkohol",
+    "wechselwirkungen": "Blutverduenner, NSAIDs",
+    "nebenwirkungen": "Magenblutungen",
+    "einnahmeart": "schlucken",
+    "dosisintervall": "8",
+    "kategorie": "Schmerzen",
+    "einheit": "Tablette",
+    "wirkstoff_pro_einheit": 100,
+    "einheit_menge": 1,
+    "teilbarkeit": [
+      1,
+      0.5
+    ]
+  },
+  {
+    "name": "Omeprazol",
+    "wirkstoff": "Omeprazol",
+    "standarddosierung": "20 mg",
+    "max_tagesdosis": "40 mg",
+    "hinweise": "Morgens nuechtern",
+    "nahrung": "Grapefruit",
+    "wechselwirkungen": "Clopidogrel, Diazepam",
+    "nebenwirkungen": "Kopfschmerzen",
+    "einnahmeart": "schlucken",
+    "dosisintervall": "24",
+    "kategorie": "Magen",
+    "einheit": "Tablette",
+    "wirkstoff_pro_einheit": 20,
+    "einheit_menge": 1,
+    "teilbarkeit": [
+      1,
+      0.5
+    ]
+  },
+  {
+    "name": "Metformin",
+    "wirkstoff": "Metformin",
+    "standarddosierung": "500 mg",
+    "max_tagesdosis": "2000 mg",
+    "hinweise": "Zum Essen",
+    "nahrung": "Alkohol",
+    "wechselwirkungen": "Kontrastmittel, Diuretika",
+    "nebenwirkungen": "Magendarmbeschwerden",
+    "einnahmeart": "schlucken",
+    "dosisintervall": "12",
+    "kategorie": "Diabetes",
+    "einheit": "Tablette",
+    "wirkstoff_pro_einheit": 500,
+    "einheit_menge": 1,
+    "teilbarkeit": [
+      1,
+      0.5
+    ]
+  },
+  {
+    "name": "Amoxicillin",
+    "wirkstoff": "Amoxicillin",
+    "standarddosierung": "500 mg",
+    "max_tagesdosis": "3000 mg",
+    "hinweise": "Mit Wasser, gleichmaessig ueber den Tag",
+    "nahrung": "Milchprodukte",
+    "wechselwirkungen": "Methotrexat, Allopurinol",
+    "nebenwirkungen": "Durchfall",
+    "einnahmeart": "schlucken",
+    "dosisintervall": "8",
+    "kategorie": "Antibiotika",
+    "einheit": "Tablette",
+    "wirkstoff_pro_einheit": 500,
+    "einheit_menge": 1,
+    "teilbarkeit": [
+      1,
+      0.5
+    ]
+  },
+  {
+    "name": "Pantoprazol",
+    "wirkstoff": "Pantoprazol",
+    "standarddosierung": "40 mg",
+    "max_tagesdosis": "80 mg",
+    "hinweise": "Vor dem Essen",
+    "nahrung": "Grapefruit",
+    "wechselwirkungen": "Atazanavir, Ketoconazol",
+    "nebenwirkungen": "Schwindel",
+    "einnahmeart": "schlucken",
+    "dosisintervall": "24",
+    "kategorie": "Magen",
+    "einheit": "Tablette",
+    "wirkstoff_pro_einheit": 40,
+    "einheit_menge": 1,
+    "teilbarkeit": [
+      1,
+      0.5
+    ]
+  },
+  {
+    "name": "Simvastatin",
+    "wirkstoff": "Simvastatin",
+    "standarddosierung": "20 mg",
+    "max_tagesdosis": "40 mg",
+    "hinweise": "Abends",
+    "nahrung": "Grapefruit",
+    "wechselwirkungen": "CYP3A4-Hemmer",
+    "nebenwirkungen": "Muskelschmerzen",
+    "einnahmeart": "schlucken",
+    "dosisintervall": "24",
+    "kategorie": "Cholesterin",
+    "einheit": "Tablette",
+    "wirkstoff_pro_einheit": 20,
+    "einheit_menge": 1,
+    "teilbarkeit": [
+      1,
+      0.5
+    ]
+  },
+  {
+    "name": "Levothyroxin",
+    "wirkstoff": "Levothyroxin",
+    "standarddosierung": "50 µg",
+    "max_tagesdosis": "200 µg",
+    "hinweise": "Morgens nuechtern",
+    "nahrung": "Soja",
+    "wechselwirkungen": "Eisenpraeparate, Kalzium",
+    "nebenwirkungen": "Herzrasen",
+    "einnahmeart": "schlucken",
+    "dosisintervall": "24",
+    "kategorie": "Schilddruese",
+    "einheit": "Tablette",
+    "wirkstoff_pro_einheit": 50,
+    "einheit_menge": 1,
+    "teilbarkeit": [
+      1,
+      0.5
+    ]
+  },
+  {
+    "name": "Diclofenac",
+    "wirkstoff": "Diclofenac",
+    "standarddosierung": "50 mg",
+    "max_tagesdosis": "150 mg",
+    "hinweise": "Nach dem Essen, mit Wasser",
+    "nahrung": "Alkohol",
+    "wechselwirkungen": "Blutverduenner, Diuretika",
+    "nebenwirkungen": "Magenreizung",
+    "einnahmeart": "schlucken",
+    "dosisintervall": "8",
+    "kategorie": "Schmerzen",
+    "einheit": "Tablette",
+    "wirkstoff_pro_einheit": 50,
+    "einheit_menge": 1,
+    "teilbarkeit": [
+      1,
+      0.5
+    ]
   }
 ];
 
@@ -392,6 +637,13 @@ window.calculateDosage = function () {
         dosierung = "30–45 mg/Tag in 2–3 Dosen";
       } else if (age >= 12) {
         dosierung = "Erst 90 mg/Tag (2–3 Dosen), dann 60 mg/Tag in 2 Dosen";
+      }
+    }
+    else if (med.wirkstoff.toLowerCase().includes("amoxicillin") && !isNaN(weight)) {
+      if (weight < 40) {
+        dosierung = "Dosis muss individuell nach Gewicht angepasst werden (< 40 kg)";
+      } else {
+        dosierung = "250–500 mg alle 8 Stunden, ggf. 750–1000 mg bei schweren Infektionen";
       }
     }
     document.getElementById("reminder-hinweis").textContent =
