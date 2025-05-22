@@ -646,7 +646,39 @@ window.calculateDosage = function () {
         dosierung = "250–500 mg alle 8 Stunden, ggf. 750–1000 mg bei schweren Infektionen";
       }
     }
-    document.getElementById("reminder-hinweis").textContent =
+    
+  } else if (med.wirkstoff.toLowerCase().includes("acetylcystein") && !isNaN(age)) {
+    if (age >= 2 && age <= 5) {
+      dosierung = "5 ml 2–3× täglich";
+      zusatz = " = 200–300 mg/Tag";
+    } else if (age >= 6 && age <= 14) {
+      dosierung = "10 ml 2× täglich";
+      zusatz = " = 400 mg/Tag";
+    } else if (age >= 15) {
+      dosierung = "10 ml 3× täglich";
+      zusatz = " = 600 mg/Tag";
+    } else {
+      dosierung = "Nicht empfohlen für < 2 Jahre";
+    }
+  } else if (med.wirkstoff.toLowerCase().includes("ambroxol") && !isNaN(age)) {
+    if (age < 2) {
+      dosierung = "15 mg/Tag in 2 Dosen";
+    } else if (age >= 2 && age <= 5) {
+      dosierung = "22,5 mg/Tag in 2 Dosen";
+    } else if (age >= 6 && age < 12) {
+      dosierung = "30–45 mg/Tag in 2–3 Dosen";
+    } else if (age >= 12) {
+      dosierung = "Erst 90 mg/Tag (2–3 Dosen), dann 60 mg/Tag in 2 Dosen";
+    }
+  } else if (med.wirkstoff.toLowerCase().includes("amoxicillin") && !isNaN(weight)) {
+    if (weight < 40) {
+      dosierung = "Dosis muss individuell nach Gewicht angepasst werden (< 40 kg)";
+    } else {
+      dosierung = "250–500 mg alle 8 Stunden, ggf. 750–1000 mg bei schweren Infektionen";
+    }
+  }
+
+  document.getElementById("reminder-hinweis").textContent =
     "Hinweis: Die Dosierungsanzeige ist vereinfacht und ersetzt keine ärztliche Beratung.";
 };
 
