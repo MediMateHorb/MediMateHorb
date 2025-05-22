@@ -1,18 +1,22 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MediMateHorb - Dein Medikamentenassistent</title>
+  <title>MediMateHorb</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 </head>
 <body>
-  <div id="app">
-    <header>
+  <header class="header">
+    <div class="header-content">
       <img src="logo.png" alt="MediMateHorb Logo" class="logo">
-      <h1>MediMateHorb - Dein Medikamentenassistent</h1>
-    </header>
+      <h1>MediMateHorb – Dein Medikamentenassistent</h1>
+    </div>
+  </header>
 
+  <div id="app">
     <section id="login-section">
       <h2>Login</h2>
       <input type="email" id="email" placeholder="Email">
@@ -52,14 +56,11 @@
       <p id="reminder-feedback"></p>
 
       <p id="reminder-hinweis">
-        Hinweis: Die Dosierungsberechnung ist vereinfacht und berücksichtigt nicht alle individuellen Faktoren. Für eine genaue Dosierungsempfehlung sollte stets ein Arzt oder Apotheker konsultiert werden.
+        Hinweis: Die Dosierungsberechnung ist vereinfacht und ersetzt keine ärztliche Beratung.
       </p>
     </section>
   </div>
 
-  <!-- Supabase zuerst laden -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <!-- Dann deine Anwendungsskripte -->
   <script src="script.js"></script>
 </body>
 </html>
