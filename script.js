@@ -564,13 +564,15 @@ window.calculateDosage = function () {
 window.confirmIntake = async function () {
   const jetzt = new Date();
   const stdIntervall = parseInt(aktuellesMedikament.dosisintervall) || 6;
-  const naechsteEinnahme = new Date(jetzt.getTime() + (stdIntervall - 1) * 60 * 60 * 1000);
+  const naechsteEinnahme = new Date(jetzt.getTime() + stdIntervall * 60 * 60 * 1000);
   const uhrzeit = naechsteEinnahme.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   document.getElementById("reminder-status").textContent = `Du wirst um ${uhrzeit} an die nächste Einnahme erinnert.`;
 
-  const { data, error } = await supabase.auth.getUser();
-  if (!data?.user) return alert('Nicht eingeloggt.');
-  const email = data.user.email;
+  const { data: userData, error: userError } = await supabase.auth.getUser();
+  const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+  if (!userData?.user || !sessionData?.session) return alert("Nicht eingeloggt.");
+
+  const token = sessionData.session.access_token;
 
   try {
     const response = await fetch(`${SUPABASE_URL}/rest/v1/reminders`, {
@@ -578,11 +580,11 @@ window.confirmIntake = async function () {
       headers: {
         "Content-Type": "application/json",
         "apikey": SUPABASE_KEY,
-        "Authorization": "Bearer " + SUPABASE_KEY
+        "Authorization": "Bearer " + token
       },
       body: JSON.stringify({
-        user_id: data.user.id,
-        user_email: email,
+        user_id: userData.user.id,
+        user_email: userData.user.email,
         med_name: aktuellesMedikament.name,
         next_time: naechsteEinnahme.toISOString(),
         interval_h: stdIntervall,
