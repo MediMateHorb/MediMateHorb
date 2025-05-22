@@ -225,6 +225,44 @@ const medikamente = [
     "dosisintervall": "12",
     "kategorie": "Diabetes",
     "max_einnahmedauer": "Dauertherapie"
+  },
+  {
+    "name": "ACC Kindersaft",
+    "wirkstoff": "Acetylcystein",
+    "standarddosierung": "Je nach Alter 5–10 ml, 2–3× täglich",
+    "einheit": "Saft",
+    "wirkstoff_pro_einheit": 100,
+    "einheit_menge": 5,
+    "teilbarkeit": [
+      1
+    ],
+    "hinweise": "Nach den Mahlzeiten einnehmen.",
+    "nahrung": "Keine besonderen Einschränkungen.",
+    "wechselwirkungen": "Hustenstiller, Antibiotika",
+    "nebenwirkungen": "Magenbeschwerden, selten allergische Reaktionen",
+    "einnahmeart": "schlucken",
+    "dosisintervall": "8",
+    "kategorie": "Husten",
+    "max_einnahmedauer": "5 Tage ohne ärztlichen Rat"
+  },
+  {
+    "name": "Ambroxol Saft",
+    "wirkstoff": "Ambroxol",
+    "standarddosierung": "15–45 mg je nach Alter aufgeteilt in 2–3 Dosen",
+    "einheit": "Saft",
+    "wirkstoff_pro_einheit": 15,
+    "einheit_menge": 5,
+    "teilbarkeit": [
+      1
+    ],
+    "hinweise": "Nach den Mahlzeiten einnehmen.",
+    "nahrung": "Keine Einschränkungen.",
+    "wechselwirkungen": "Keine signifikanten",
+    "nebenwirkungen": "Übelkeit, Taubheitsgefühl im Mund/Rachen",
+    "einnahmeart": "schlucken",
+    "dosisintervall": "8",
+    "kategorie": "Husten",
+    "max_einnahmedauer": "5 Tage ohne ärztlichen Rat"
   }
 ];
 
@@ -331,7 +369,32 @@ window.calculateDosage = function () {
   document.getElementById("dosisintervall").textContent = med.dosisintervall;
   document.getElementById("kategorie").textContent = med.kategorie;
   document.getElementById("max-einnahmedauer").textContent = med.max_einnahmedauer;
-  document.getElementById("reminder-hinweis").textContent =
+  else if (med.wirkstoff.toLowerCase().includes("acetylcystein") && !isNaN(age)) {
+      if (age >= 2 && age <= 5) {
+        dosierung = "5 ml 2–3× täglich";
+        zusatz = " = 200–300 mg/Tag";
+      } else if (age >= 6 && age <= 14) {
+        dosierung = "10 ml 2× täglich";
+        zusatz = " = 400 mg/Tag";
+      } else if (age >= 15) {
+        dosierung = "10 ml 3× täglich";
+        zusatz = " = 600 mg/Tag";
+      } else {
+        dosierung = "Nicht empfohlen für < 2 Jahre";
+      }
+    }
+    else if (med.wirkstoff.toLowerCase().includes("ambroxol") && !isNaN(age)) {
+      if (age < 2) {
+        dosierung = "15 mg/Tag in 2 Dosen";
+      } else if (age >= 2 && age <= 5) {
+        dosierung = "22,5 mg/Tag in 2 Dosen";
+      } else if (age >= 6 && age < 12) {
+        dosierung = "30–45 mg/Tag in 2–3 Dosen";
+      } else if (age >= 12) {
+        dosierung = "Erst 90 mg/Tag (2–3 Dosen), dann 60 mg/Tag in 2 Dosen";
+      }
+    }
+    document.getElementById("reminder-hinweis").textContent =
     "Hinweis: Die Dosierungsanzeige ist vereinfacht und ersetzt keine ärztliche Beratung.";
 };
 
