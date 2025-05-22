@@ -322,27 +322,7 @@ const medikamente = [
       0.5
     ]
   },
-  {
-    "name": "Metformin",
-    "wirkstoff": "Metformin",
-    "standarddosierung": "500 mg",
-    "max_tagesdosis": "2000 mg",
-    "hinweise": "Zum Essen",
-    "nahrung": "Alkohol",
-    "wechselwirkungen": "Kontrastmittel, Diuretika",
-    "nebenwirkungen": "Magendarmbeschwerden",
-    "einnahmeart": "schlucken",
-    "dosisintervall": "12",
-    "kategorie": "Diabetes",
-    "einheit": "Tablette",
-    "wirkstoff_pro_einheit": 500,
-    "einheit_menge": 1,
-    "teilbarkeit": [
-      1,
-      0.5
-    ]
-  },
-  {
+    {
     "name": "Amoxicillin",
     "wirkstoff": "Amoxicillin",
     "standarddosierung": "500 mg",
