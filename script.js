@@ -266,9 +266,7 @@ window.calculateDosage = function () {
     } else {
       dosierung = "Nicht empfohlen für < 20 kg";
     }
-  }
-
-  if (med.wirkstoff.toLowerCase().includes("paracetamol") && med.wirkstoff_pro_einheit === 500 && !isNaN(weight)) {
+  } else if (med.wirkstoff.toLowerCase().includes("paracetamol") && med.wirkstoff_pro_einheit === 500 && !isNaN(weight)) {
     if (weight >= 17 && weight <= 25) {
       dosierung = "½ Tablette (250 mg)";
       zusatz = " max. 2 Tabletten (1000 mg) pro Tag";
@@ -284,9 +282,7 @@ window.calculateDosage = function () {
     } else {
       dosierung = "Nicht empfohlen für < 17 kg";
     }
-  }
-
-  if (med.wirkstoff.toLowerCase().includes("acetylsalicylsäure") && !isNaN(age)) {
+  } else if (med.wirkstoff.toLowerCase().includes("acetylsalicylsäure") && !isNaN(age)) {
     if (age >= 12 && age <= 15 && weight >= 40 && weight <= 50) {
       dosierung = "1 Tablette (500 mg)";
       zusatz = " max. 6 Tabletten (3000 mg) pro Tag";
@@ -298,6 +294,29 @@ window.calculateDosage = function () {
       zusatz = " max. 4 Tabletten (2000 mg) pro Tag";
     } else {
       dosierung = "Nicht empfohlen für Kinder unter 12 Jahren";
+    }
+  } else if (med.wirkstoff.toLowerCase().includes("omeprazol") && !isNaN(weight) && !isNaN(age)) {
+    if (age < 1 && weight >= 10 && weight <= 20) {
+      dosierung = "10 mg täglich";
+      zusatz = " max. 20 mg pro Tag";
+    } else if (age >= 1 && weight > 20 && age < 4) {
+      dosierung = "20 mg täglich";
+      zusatz = " max. 40 mg pro Tag";
+    } else if (age >= 4 && weight >= 15 && weight <= 30) {
+      dosierung = "10 mg täglich (mit Antibiotika)";
+    } else if (age >= 4 && weight > 30) {
+      dosierung = "20 mg täglich (mit Antibiotika)";
+    } else if (age >= 18) {
+      dosierung = "20 mg täglich, ggf. anpassen";
+      zusatz = " 10–40 mg üblich, bis zu 120 mg";
+    }
+  } else if (med.wirkstoff.toLowerCase().includes("metformin") && !isNaN(age)) {
+    if (age >= 10 && age < 18) {
+      dosierung = "500–850 mg 1× täglich";
+      zusatz = " max. 2000 mg/Tag in 2–3 Dosen";
+    } else if (age >= 18) {
+      dosierung = "500–850 mg 2–3× täglich";
+      zusatz = " max. 3000 mg/Tag";
     }
   }
 
@@ -312,31 +331,7 @@ window.calculateDosage = function () {
   document.getElementById("dosisintervall").textContent = med.dosisintervall;
   document.getElementById("kategorie").textContent = med.kategorie;
   document.getElementById("max-einnahmedauer").textContent = med.max_einnahmedauer;
-  else if (med.wirkstoff.toLowerCase().includes("omeprazol") && !isNaN(weight) && !isNaN(age)) {
-      if (age < 1 && weight >= 10 && weight <= 20) {
-        dosierung = "10 mg täglich";
-        zusatz = " max. 20 mg pro Tag";
-      } else if (age >= 1 && weight > 20 && age < 4) {
-        dosierung = "20 mg täglich";
-        zusatz = " max. 40 mg pro Tag";
-      } else if (age >= 4 && weight >= 15 && weight <= 30) {
-        dosierung = "10 mg täglich (mit Antibiotika)";
-      } else if (age >= 4 && weight > 30) {
-        dosierung = "20 mg täglich (mit Antibiotika)";
-      } else if (age >= 18) {
-        dosierung = "20 mg täglich, ggf. anpassen";
-        zusatz = " 10–40 mg üblich, bis zu 120 mg";
-      }
-    } else if (med.wirkstoff.toLowerCase().includes("metformin") && !isNaN(age)) {
-      if (age >= 10 && age < 18) {
-        dosierung = "500–850 mg 1× täglich";
-        zusatz = " max. 2000 mg/Tag in 2–3 Dosen";
-      } else if (age >= 18) {
-        dosierung = "500–850 mg 2–3× täglich";
-        zusatz = " max. 3000 mg/Tag";
-      }
-    }
-    document.getElementById("reminder-hinweis").textContent =
+  document.getElementById("reminder-hinweis").textContent =
     "Hinweis: Die Dosierungsanzeige ist vereinfacht und ersetzt keine ärztliche Beratung.";
 };
 
