@@ -490,6 +490,7 @@ window.filterMeds = function () {
   dropdown.innerHTML = "";
   medikamente
     .filter(m => m.name.toLowerCase().includes(search))
+    .sort((a, b) => a.name.localeCompare(b.name))
     .forEach(med => {
       const option = document.createElement("option");
       option.value = med.name;
