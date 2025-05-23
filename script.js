@@ -103,7 +103,7 @@ const medikamente = [
     "wechselwirkungen": "Dummy",
     "nebenwirkungen": "Dummy",
     "einnahmeart": "Dummy",
-    "dosisintervall": "1",
+    "dosisintervall": "0,1",
     "kategorie": "Kinder",
     "max_einnahmedauer": "3 Tage"
   },
