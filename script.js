@@ -89,6 +89,25 @@ const medikamente = [
     "max_einnahmedauer": "5 Tage"
   },
   {
+    "name": "Dummy",
+    "wirkstoff": "Dummy",
+    "standarddosierung": "Dummy 1 Stunden",
+    "einheit": "Dummy",
+    "wirkstoff_pro_einheit": 125,
+    "einheit_menge": 1,
+    "teilbarkeit": [
+      1
+    ],
+    "hinweise": "Dummy",
+    "nahrung": "Dummy",
+    "wechselwirkungen": "Dummy",
+    "nebenwirkungen": "Dummy",
+    "einnahmeart": "Dummy",
+    "dosisintervall": "1",
+    "kategorie": "Kinder",
+    "max_einnahmedauer": "3 Tage"
+  },
+  {
     "name": "Ambroxol",
     "wirkstoff": "Ambroxol",
     "standarddosierung": "30 mg 2–3× täglich",
