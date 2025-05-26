@@ -581,7 +581,7 @@ window.calculateDosage = function () {
 
 window.confirmIntake = async function () {
   const jetzt = new Date();
-  const stdIntervall = parseInt(aktuellesMedikament.dosisintervall) || 6;
+  const stdIntervall = parseFloat(aktuellesMedikament.dosisintervall) || 6;
   const naechsteEinnahme = new Date(jetzt.getTime() + stdIntervall * 60 * 60 * 1000);
   const uhrzeit = naechsteEinnahme.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   document.getElementById("reminder-status").textContent = `Du wirst um ${uhrzeit} an die nächste Einnahme erinnert.`;
