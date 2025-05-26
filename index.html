@@ -21,20 +21,25 @@
       <h2>Login</h2>
       <input type="email" id="email" placeholder="Email">
       <input type="password" id="password" placeholder="Passwort">
-      <button onclick="login()">Login</button>
-      <button onclick="signup()">Registrieren</button>
+      <button onclick="window.login()">Login</button>
+      <button onclick="window.signup()">Registrieren</button>
     
-      <h3>Einnahmeverlauf</h3>
-      <table id="intake-table" style="display:none;" border="1" style="width: 100%; margin-top: 10px;">
-        <thead>
-          <tr>
-            <th>Medikament</th>
-            <th>Uhrzeit</th>
-            <th>Bestätigt</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+      
+
+    
+      <div id="intake-history" style="display:none;">
+        <h3>Einnahmeverlauf</h3>
+        <table id="intake-table" border="1" style="width: 100%; margin-top: 10px;">
+          <thead>
+            <tr>
+              <th>Medikament</th>
+              <th>Uhrzeit</th>
+              <th>Bestätigt</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
 
     </section>
 
@@ -72,17 +77,22 @@
         Hinweis: Die Dosierungsberechnung ist vereinfacht und ersetzt keine ärztliche Beratung.
       </p>
     
-      <h3>Einnahmeverlauf</h3>
-      <table id="intake-table" style="display:none;" border="1" style="width: 100%; margin-top: 10px;">
-        <thead>
-          <tr>
-            <th>Medikament</th>
-            <th>Uhrzeit</th>
-            <th>Bestätigt</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+      
+
+    
+      <div id="intake-history" style="display:none;">
+        <h3>Einnahmeverlauf</h3>
+        <table id="intake-table" border="1" style="width: 100%; margin-top: 10px;">
+          <thead>
+            <tr>
+              <th>Medikament</th>
+              <th>Uhrzeit</th>
+              <th>Bestätigt</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
 
     </section>
   </div>

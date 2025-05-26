@@ -604,7 +604,10 @@ window.confirmIntake = async function () {
   const token = sessionData.session.access_token;
 
   try {
-    const response = await fetch(`${SUPABASE_URL}/rest/v1/reminders`, {
+    const response = await fetch(`${SUPABASE_URL}
+  catch (error) {
+    console.error("Fehler im try-Block:", error);
+  }/rest/v1/reminders`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -709,6 +712,7 @@ async function loadIntakeHistory() {
     .order("time_taken", { ascending: false })
     .limit(50);
 
+  document.getElementById("intake-history").style.display = "block";
   document.getElementById("intake-table").style.display = "table";
   const tbody = document.querySelector("#intake-table tbody");
   tbody.innerHTML = "";
