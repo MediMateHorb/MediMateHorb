@@ -622,6 +622,36 @@ window.onload = async function () {
   }
 };
 
+async function checkReminder(userId) {
+  const now = new Date().toISOString();
+  const { data, error } = await supabase
+    .from("reminders")
+    .select("*")
+    .eq("user_id", userId)
+    .eq("reminded", false)
+    .lte("next_time", now);
+
+  if (data && data.length > 0) {
+    const reminder = data[0];
+
+    // Push senden über Service Worker
+    if (Notification.permission === "granted" && navigator.serviceWorker) {
+      navigator.serviceWorker.ready.then(function(registration) {
+        registration.active.postMessage({
+          type: "local-push",
+          title: "💊 Medikamenten-Erinnerung",
+          body: `Bitte nimm "${reminder.med_name}" jetzt ein.`
+        });
+      });
+    }
+
+    await supabase
+      .from("reminders")
+      .update({ reminded: true })
+      .eq("id", reminder.id);
+  }
+}
+
 // Service Worker registrieren
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/service-worker.js')
@@ -640,3 +670,10 @@ if ('Notification' in window && Notification.permission !== 'granted') {
     }
   });
 }
+
+setInterval(async () => {
+  const { data: userData } = await supabase.auth.getUser();
+  if (userData?.user) {
+    await checkReminder(userData.user.id);
+  }
+}, 5 * 60 * 1000); // alle 5 Minuten
