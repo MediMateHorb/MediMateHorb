@@ -25,7 +25,11 @@ window.login = async function () {
   filterMeds();
   await loadIntakeHistory();
     await loadActiveReminders();
+    await loadTakenMedications();
+  await loadTakenMedications();
   await loadActiveReminders();
+    await loadTakenMedications();
+  await loadTakenMedications();
 
 };
 
@@ -636,7 +640,11 @@ window.confirmIntake = async function () {
     // Einnahmeverlauf neu laden
     await loadIntakeHistory();
     await loadActiveReminders();
+    await loadTakenMedications();
+  await loadTakenMedications();
   await loadActiveReminders();
+    await loadTakenMedications();
+  await loadTakenMedications();
 
   } catch (error) {
     console.error(error);
@@ -789,8 +797,59 @@ async function confirmReminder(id) {
 
   if (!error) {
     await loadActiveReminders();
+    await loadTakenMedications();
+  await loadTakenMedications();
     await loadIntakeHistory();
     await loadActiveReminders();
-  await loadActiveReminders(); // aktualisiert Historie
+    await loadTakenMedications();
+  await loadTakenMedications();
+  await loadActiveReminders();
+    await loadTakenMedications();
+  await loadTakenMedications(); // aktualisiert Historie
   }
+}
+
+
+
+async function loadTakenMedications() {
+  const { data: userData } = await supabase.auth.getUser();
+  if (!userData?.user) return;
+
+  const { data, error } = await supabase
+    .from("intake_log")
+    .select("*")
+    .eq("user_id", userData.user.id)
+    .order("time_taken", { ascending: false });
+
+  const container = document.getElementById("medication-overview");
+  if (!container) return;
+
+  if (!data || data.length === 0) {
+    container.innerHTML = "<p>Bisher keine Medikamente eingenommen.</p>";
+    return;
+  }
+
+  const rows = data.map(entry => `
+    <tr>
+      <td>${entry.med_name}</td>
+      <td>${new Date(entry.time_taken).toLocaleString()}</td>
+      <td>${entry.confirmed ? "✅ Eingenommen" : "❌ Nicht bestätigt"}</td>
+    </tr>
+  `).join("");
+
+  container.innerHTML = `
+    <h3>Bereits eingenommene Medikamente</h3>
+    <table border="1" style="width:100%; margin-top:10px;">
+      <thead>
+        <tr>
+          <th>Medikament</th>
+          <th>Zeitpunkt</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rows}
+      </tbody>
+    </table>
+  `;
 }
