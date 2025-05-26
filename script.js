@@ -24,6 +24,8 @@ window.login = async function () {
 
   filterMeds();
   await loadIntakeHistory();
+    await loadActiveReminders();
+  await loadActiveReminders();
 
 };
 
@@ -633,6 +635,8 @@ window.confirmIntake = async function () {
 
     // Einnahmeverlauf neu laden
     await loadIntakeHistory();
+    await loadActiveReminders();
+  await loadActiveReminders();
 
   } catch (error) {
     console.error(error);
@@ -731,4 +735,62 @@ async function loadIntakeHistory() {
 
     tbody.appendChild(row);
   });
+}
+
+async function loadActiveReminders() {
+  const { data: userData } = await supabase.auth.getUser();
+  if (!userData?.user) return;
+
+  const { data, error } = await supabase
+    .from("reminders")
+    .select("*")
+    .eq("user_id", userData.user.id)
+    .eq("reminded", false)
+    .order("next_time", { ascending: true });
+
+  const container = document.getElementById("active-reminders");
+  if (!container) return;
+
+  if (!data || data.length === 0) {
+    container.innerHTML = "<p>Keine offenen Einnahmen.</p>";
+    return;
+  }
+
+  const rows = data.map(reminder => `
+    <tr>
+      <td>${reminder.med_name}</td>
+      <td>${new Date(reminder.next_time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
+      <td><button onclick="confirmReminder('${reminder.id}')">✅ Bestätigen</button></td>
+    </tr>
+  `).join("");
+
+  container.innerHTML = `
+    <h3>Offene Einnahmen</h3>
+    <table border="1" style="width:100%; margin-top:10px;">
+      <thead>
+        <tr>
+          <th>Medikament</th>
+          <th>Nächste Einnahme</th>
+          <th>Aktion</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rows}
+      </tbody>
+    </table>
+  `;
+}
+
+async function confirmReminder(id) {
+  const { error } = await supabase
+    .from("reminders")
+    .update({ reminded: true })
+    .eq("id", id);
+
+  if (!error) {
+    await loadActiveReminders();
+    await loadIntakeHistory();
+    await loadActiveReminders();
+  await loadActiveReminders(); // aktualisiert Historie
+  }
 }
