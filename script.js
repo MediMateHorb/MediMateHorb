@@ -604,10 +604,7 @@ window.confirmIntake = async function () {
   const token = sessionData.session.access_token;
 
   try {
-    const response = await fetch(`${SUPABASE_URL}
-  catch (error) {
-    console.error("Fehler im try-Block:", error);
-  }/rest/v1/reminders`, {
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/reminders`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -627,16 +624,16 @@ window.confirmIntake = async function () {
     if (!response.ok) throw new Error("Fehler beim Speichern des Reminders.");
     document.getElementById("reminder-feedback").textContent = "Erinnerung erfolgreich gespeichert.";
 
-// Einnahme im Log speichern
-await supabase.from("intake_log").insert({
-  user_id: userData.user.id,
-  med_name: aktuellesMedikament.name,
-  confirmed: true
-});
+    // Einnahme im Log speichern
+    await supabase.from("intake_log").insert({
+      user_id: userData.user.id,
+      med_name: aktuellesMedikament.name,
+      confirmed: true
+    });
 
-// Einnahmeverlauf neu laden
-await loadIntakeHistory();
-});
+    // Einnahmeverlauf neu laden
+    await loadIntakeHistory();
+
   } catch (error) {
     console.error(error);
     document.getElementById("reminder-feedback").textContent = "Fehler beim Speichern der Erinnerung.";
