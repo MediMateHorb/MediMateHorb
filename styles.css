@@ -127,3 +127,24 @@ h1, h2, h3 {
     padding: 0.6rem;
   }
 }
+
+#medication-overview {
+  margin-top: 2rem;
+}
+
+#medication-overview button {
+  margin-right: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+#medication-overview table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+#medication-overview th, #medication-overview td {
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  text-align: left;
+}

@@ -16,49 +16,55 @@
   </header>
 
   <main id="app">
-    <!-- Bestehende Reminder-Funktion -->
-    <section id="reminder-status">
-      <p>Hier erscheint dein Reminder-Status...</p>
+    <section id="login-section">
+      <input id="email" placeholder="E-Mail" type="email" />
+      <input id="password" placeholder="Passwort" type="password" />
+      <button onclick="login()">Login</button>
+      <button onclick="signup()">Registrieren</button>
     </section>
 
-    <!-- Neue Medikamentenübersicht -->
-    <section id="medication-overview">
-      <h2>Medikamentenübersicht</h2>
-      <div>
-        <button onclick="showTab('upcoming')" id="tab-upcoming">🕒 Bevorstehend</button>
-        <button onclick="showTab('history')" id="tab-history">📜 Historie</button>
-      </div>
+    <section id="main-section" style="display:none;">
+      <div id="reminder-status"></div>
 
-      <div id="tab-content-upcoming" class="tab-content">
-        <table id="upcoming-table">
-          <thead>
-            <tr>
-              <th>Medikament</th>
-              <th>Dosierung</th>
-              <th>Nächste Einnahme</th>
-              <th>Aktion</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
+      <!-- Neue Medikamentenübersicht -->
+      <section id="medication-overview">
+        <h2>Medikamentenübersicht</h2>
+        <div>
+          <button onclick="showTab('upcoming')" id="tab-upcoming">🕒 Bevorstehend</button>
+          <button onclick="showTab('history')" id="tab-history">📜 Historie</button>
+        </div>
 
-      <div id="tab-content-history" class="tab-content" style="display:none">
-        <table id="history-table">
-          <thead>
-            <tr>
-              <th>Medikament</th>
-              <th>Dosierung</th>
-              <th>Einnahmezeitpunkt</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
+        <div id="tab-content-upcoming" class="tab-content">
+          <table id="upcoming-table">
+            <thead>
+              <tr>
+                <th>Medikament</th>
+                <th>Dosierung</th>
+                <th>Nächste Einnahme</th>
+                <th>Aktion</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div id="tab-content-history" class="tab-content" style="display:none">
+          <table id="history-table">
+            <thead>
+              <tr>
+                <th>Medikament</th>
+                <th>Dosierung</th>
+                <th>Einnahmezeitpunkt</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
     </section>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <script src="script_mit_reminder_uebersicht.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

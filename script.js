@@ -855,8 +855,7 @@ async function loadTakenMedications() {
 }
 
 
-// Neue Funktionen für Medikamenten-Übersicht (Tabs)
-
+// Erweiterung: Medikamentenübersicht mit Tabs
 async function fetchMedications() {
   const { data: userData } = await supabase.auth.getUser();
   if (!userData?.user) return;
@@ -931,4 +930,9 @@ function showTab(tab) {
   document.getElementById('tab-history').style.fontWeight = tab === 'history' ? 'bold' : 'normal';
 }
 
-document.addEventListener('DOMContentLoaded', fetchMedications);
+// Tabs nach Login laden
+const origLogin = login;
+login = async function () {
+  await origLogin();
+  fetchMedications();
+};
