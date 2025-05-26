@@ -23,6 +23,7 @@ window.login = async function () {
   }, 5 * 60 * 1000); // alle 5 Minuten
 
   filterMeds();
+  await loadIntakeHistory();
 
 };
 
@@ -622,6 +623,13 @@ window.confirmIntake = async function () {
 
     if (!response.ok) throw new Error("Fehler beim Speichern des Reminders.");
     document.getElementById("reminder-feedback").textContent = "Erinnerung erfolgreich gespeichert.";
+
+// Einnahme im Log speichern
+await supabase.from("intake_log").insert({
+  user_id: userData.user.id,
+  med_name: aktuellesMedikament.name,
+  confirmed: true
+});
   } catch (error) {
     console.error(error);
     document.getElementById("reminder-feedback").textContent = "Fehler beim Speichern der Erinnerung.";
@@ -685,3 +693,36 @@ setInterval(async () => {
     await checkReminder(userData.user.id);
   }
 }, 5 * 60 * 1000); // alle 5 Minuten
+
+async function loadIntakeHistory() {
+  const { data: userData } = await supabase.auth.getUser();
+  if (!userData?.user) return;
+
+  const { data, error } = await supabase
+    .from("intake_log")
+    .select("*")
+    .eq("user_id", userData.user.id)
+    .order("time_taken", { ascending: false })
+    .limit(50);
+
+  const tbody = document.querySelector("#intake-table tbody");
+  tbody.innerHTML = "";
+
+  data.forEach(entry => {
+    const row = document.createElement("tr");
+
+    const medName = document.createElement("td");
+    medName.textContent = entry.med_name;
+    row.appendChild(medName);
+
+    const timeTaken = document.createElement("td");
+    timeTaken.textContent = new Date(entry.time_taken).toLocaleString();
+    row.appendChild(timeTaken);
+
+    const confirmed = document.createElement("td");
+    confirmed.textContent = entry.confirmed ? "✅" : "❌";
+    row.appendChild(confirmed);
+
+    tbody.appendChild(row);
+  });
+}
