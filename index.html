@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MediMate Übersicht</title>
+  <title>MediMate – Medikamentenplan</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -24,7 +24,36 @@
     </section>
 
     <section id="main-section" style="display:none;">
-      <div id="reminder-status"></div>
+      <h2>Medikamentenplan erstellen</h2>
+
+      <input id="search-med" type="text" placeholder="Suche Medikament..." oninput="filterMeds()" />
+      <select id="med-dropdown"></select>
+
+      <h3>Patientendaten</h3>
+      <input id="age" type="number" placeholder="Alter in Jahren" />
+      <input id="weight" type="number" placeholder="Gewicht in kg" />
+      <button onclick="calculateDosage()">Dosierung berechnen</button>
+
+      <section id="results">
+        <h3>Ergebnisse</h3>
+        <p><strong>Empfohlene Dosierung:</strong> <span id="empf-dosierung"></span></p>
+        <p><strong>Wirkstoff:</strong> <span id="wirkstoff"></span></p>
+        <p><strong>Standarddosierung:</strong> <span id="std-dosierung"></span></p>
+        <p><strong>Einnahmehinweise:</strong> <span id="hinweise"></span></p>
+        <p><strong>Unverträgliche Nahrung:</strong> <span id="nahrung"></span></p>
+        <p><strong>Wechselwirkungen:</strong> <span id="wechselwirkungen"></span></p>
+        <p><strong>Nebenwirkungen:</strong> <span id="nebenwirkungen"></span></p>
+        <p><strong>Einnahmeart:</strong> <span id="einnahmeart"></span></p>
+        <p><strong>Dosisintervall:</strong> <span id="dosisintervall"></span></p>
+        <p><strong>Kategorie:</strong> <span id="kategorie"></span></p>
+        <p><strong>Maximale Einnahmedauer:</strong> <span id="max-einnahmedauer"></span></p>
+      </section>
+
+      <h3>Einnahme bestätigen</h3>
+      <button onclick="confirmIntake()">Einnahme jetzt bestätigen</button>
+      <p id="reminder-status"></p>
+      <p id="reminder-feedback"></p>
+      <p id="reminder-hinweis">Hinweis: Die Dosierungsanzeige ist vereinfacht und ersetzt keine ärztliche Beratung.</p>
 
       <!-- Neue Medikamentenübersicht -->
       <section id="medication-overview">
