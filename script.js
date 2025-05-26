@@ -597,34 +597,7 @@ window.calculateDosage = function () {
 
 
 
-window.confirmIntake = async function () {
-  const jetzt = new Date();
-  const stdIntervall = parseFloat(aktuellesMedikament.dosisintervall) || 6;
-  const naechsteEinnahme = new Date(jetzt.getTime() + stdIntervall * 60 * 60 * 1000);
-  const uhrzeit = naechsteEinnahme.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  document.getElementById("reminder-status").textContent = `Du wirst um ${uhrzeit} an die nächste Einnahme erinnert.`;
 
-  const { data: userData, error: userError } = await supabase.auth.getUser();
-  if (!userData?.user) return alert("Nicht eingeloggt.");
-
-  const { error: insertError } = await supabase.from("reminders").insert({
-    user_id: userData.user.id,
-    user_email: userData.user.email,
-    med_name: aktuellesMedikament.name,
-    next_time: naechsteEinnahme.toISOString(),
-    interval_h: stdIntervall,
-    reminded: false
-  });
-
-  if (insertError) {
-    console.error(insertError);
-    document.getElementById("reminder-feedback").textContent = "Fehler beim Speichern der Erinnerung.";
-    return;
-  }
-
-  document.getElementById("reminder-feedback").textContent = "Erinnerung erfolgreich gespeichert.";
-  fetchMedications();
-};
 
 
 
@@ -870,6 +843,7 @@ async function fetchMedications() {
       </tr>
     `;
 
+    
     if (isConfirmed || new Date(entry.next_time) < now) {
       historyTable.innerHTML += `
         <tr>
@@ -879,8 +853,16 @@ async function fetchMedications() {
         </tr>
       `;
     } else {
-      upcomingTable.innerHTML += medRow;
+      upcomingTable.innerHTML += `
+        <tr>
+          <td>${entry.med_name}</td>
+          <td>${entry.interval_h}h</td>
+          <td>${nextTime}</td>
+          <td><button onclick="toggleReminderStatus('${entry.id}')">Noch nicht eingenommen</button></td>
+        </tr>
+      `;
     }
+
   });
 }
 
@@ -907,3 +889,54 @@ function showTab(tab) {
 }
 
 document.addEventListener('DOMContentLoaded', fetchMedications);
+
+
+
+// Erweiterte Einnahmefunktion mit/ohne Erinnerung
+async function confirmIntakeWithReminder(remind = true) {
+  const jetzt = new Date();
+  const stdIntervall = parseFloat(aktuellesMedikament.dosisintervall) || 6;
+  const naechsteEinnahme = new Date(jetzt.getTime() + stdIntervall * 60 * 60 * 1000);
+  const uhrzeit = naechsteEinnahme.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const { data: userData } = await supabase.auth.getUser();
+
+  if (!userData?.user) return alert("Nicht eingeloggt.");
+
+  if (remind) {
+    document.getElementById("reminder-status").textContent = `Du wirst um ${uhrzeit} an die nächste Einnahme erinnert.`;
+    await supabase.from("reminders").insert({
+      user_id: userData.user.id,
+      user_email: userData.user.email,
+      med_name: aktuellesMedikament.name,
+      next_time: naechsteEinnahme.toISOString(),
+      interval_h: stdIntervall,
+      reminded: false
+    });
+  } else {
+    document.getElementById("reminder-status").textContent = `Einnahme wurde ohne weitere Erinnerung gespeichert.`;
+  }
+
+  await supabase.from("intake_log").insert({
+    user_id: userData.user.id,
+    med_name: aktuellesMedikament.name,
+    confirmed: true,
+    time_taken: jetzt.toISOString()
+  });
+
+  fetchMedications();
+}
+
+// Klick auf Reminderstatus zum Aktualisieren
+async function toggleReminderStatus(reminderId) {
+  const { error } = await supabase
+    .from('reminders')
+    .update({ reminded: true })
+    .eq('id', reminderId);
+
+  if (error) {
+    alert("Fehler beim Aktualisieren des Status.");
+    return;
+  }
+
+  fetchMedications();
+}

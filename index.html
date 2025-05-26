@@ -50,7 +50,8 @@
       </section>
 
       <h3>Einnahme bestätigen</h3>
-      <button onclick="confirmIntake()">Einnahme jetzt bestätigen</button>
+      <button onclick="confirmIntakeWithReminder(true)">💊 Einnahme bestätigen mit Erinnerung</button>
+      <button onclick="confirmIntakeWithReminder(false)">✅ Nur Einnahme bestätigen</button>
       <p id="reminder-status"></p>
       <p id="reminder-feedback"></p>
       <p id="reminder-hinweis">Hinweis: Die Dosierungsanzeige ist vereinfacht und ersetzt keine ärztliche Beratung.</p>
@@ -70,7 +71,7 @@
                 <th>Medikament</th>
                 <th>Dosierung</th>
                 <th>Nächste Einnahme</th>
-                <th>Aktion</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody></tbody>
@@ -94,6 +95,6 @@
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <script src="script.js"></script>
+  <script src="script_erweitert.js"></script>
 </body>
 </html>
