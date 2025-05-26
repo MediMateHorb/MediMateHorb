@@ -630,6 +630,10 @@ await supabase.from("intake_log").insert({
   med_name: aktuellesMedikament.name,
   confirmed: true
 });
+
+// Einnahmeverlauf neu laden
+await loadIntakeHistory();
+});
   } catch (error) {
     console.error(error);
     document.getElementById("reminder-feedback").textContent = "Fehler beim Speichern der Erinnerung.";
@@ -705,6 +709,7 @@ async function loadIntakeHistory() {
     .order("time_taken", { ascending: false })
     .limit(50);
 
+  document.getElementById("intake-table").style.display = "table";
   const tbody = document.querySelector("#intake-table tbody");
   tbody.innerHTML = "";
 
