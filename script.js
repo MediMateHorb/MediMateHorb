@@ -1,4 +1,3 @@
-
 const SUPABASE_URL = "https://qodjghrxucatvgvamdvu.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFvZGpnaHJ4dWNhdHZndmFtZHZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc4MzM0NTYsImV4cCI6MjA2MzQwOTQ1Nn0.DpMR66cpC57FCWA2Cs-drgOKuvjmBnTqarg2KPDWHcw";
 
@@ -87,25 +86,6 @@ const medikamente = [
     "dosisintervall": "8",
     "kategorie": "Schmerzmittel",
     "max_einnahmedauer": "5 Tage"
-  },
-  {
-    "name": "Dummy",
-    "wirkstoff": "Dummy",
-    "standarddosierung": "Dummy 1 Stunden",
-    "einheit": "Dummy",
-    "wirkstoff_pro_einheit": 125,
-    "einheit_menge": 1,
-    "teilbarkeit": [
-      1
-    ],
-    "hinweise": "Dummy",
-    "nahrung": "Dummy",
-    "wechselwirkungen": "Dummy",
-    "nebenwirkungen": "Dummy",
-    "einnahmeart": "Dummy",
-    "dosisintervall": "1",
-    "kategorie": "Kinder",
-    "max_einnahmedauer": "3 Tage"
   },
   {
     "name": "Ambroxol",
@@ -616,5 +596,28 @@ window.confirmIntake = async function () {
   } catch (error) {
     console.error(error);
     document.getElementById("reminder-feedback").textContent = "Fehler beim Speichern der Erinnerung.";
+  }
+};
+
+window.onload = async function () {
+  const { data: userData } = await supabase.auth.getUser();
+  if (!userData?.user) return;
+
+  const now = new Date().toISOString();
+  const { data, error } = await supabase
+    .from("reminders")
+    .select("*")
+    .eq("user_id", userData.user.id)
+    .eq("reminded", false)
+    .lte("next_time", now);
+
+  if (data && data.length > 0) {
+    const reminder = data[0];
+    alert(`🕒 Erinnerung: Bitte nimm dein Medikament "${reminder.med_name}" ein.`);
+
+    await supabase
+      .from("reminders")
+      .update({ reminded: true })
+      .eq("id", reminder.id);
   }
 };
