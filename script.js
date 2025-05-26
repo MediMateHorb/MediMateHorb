@@ -13,7 +13,17 @@ window.login = async function () {
   }
   document.getElementById("login-section").style.display = "none";
   document.getElementById("main-section").style.display = "block";
+  
+  await checkReminder(data.user.id);
+  setInterval(async () => {
+    const { data: userData } = await supabase.auth.getUser();
+    if (userData?.user) {
+      await checkReminder(userData.user.id);
+    }
+  }, 5 * 60 * 1000); // alle 5 Minuten
+
   filterMeds();
+
 };
 
 window.signup = async function () {
@@ -618,28 +628,7 @@ window.confirmIntake = async function () {
   }
 };
 
-window.onload = async function () {
-  const { data: userData } = await supabase.auth.getUser();
-  if (!userData?.user) return;
 
-  const now = new Date().toISOString();
-  const { data, error } = await supabase
-    .from("reminders")
-    .select("*")
-    .eq("user_id", userData.user.id)
-    .eq("reminded", false)
-    .lte("next_time", now);
-
-  if (data && data.length > 0) {
-    const reminder = data[0];
-    alert(`🕒 Erinnerung: Bitte nimm dein Medikament "${reminder.med_name}" ein.`);
-
-    await supabase
-      .from("reminders")
-      .update({ reminded: true })
-      .eq("id", reminder.id);
-  }
-};
 
 async function checkReminder(userId) {
   const now = new Date().toISOString();
