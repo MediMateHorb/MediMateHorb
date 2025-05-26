@@ -23,7 +23,7 @@ window.login = async function () {
   }, 5 * 60 * 1000); // alle 5 Minuten
 
   filterMeds();
-  await loadIntakeHistory();
+  
     await loadActiveReminders();
     await loadTakenMedications();
   await loadTakenMedications();
@@ -596,6 +596,7 @@ window.calculateDosage = function () {
 };
 
 
+
 window.confirmIntake = async function () {
   const jetzt = new Date();
   const stdIntervall = parseFloat(aktuellesMedikament.dosisintervall) || 6;
@@ -604,53 +605,27 @@ window.confirmIntake = async function () {
   document.getElementById("reminder-status").textContent = `Du wirst um ${uhrzeit} an die nächste Einnahme erinnert.`;
 
   const { data: userData, error: userError } = await supabase.auth.getUser();
-  const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
-  if (!userData?.user || !sessionData?.session) return alert("Nicht eingeloggt.");
+  if (!userData?.user) return alert("Nicht eingeloggt.");
 
-  const token = sessionData.session.access_token;
+  const { error: insertError } = await supabase.from("reminders").insert({
+    user_id: userData.user.id,
+    user_email: userData.user.email,
+    med_name: aktuellesMedikament.name,
+    next_time: naechsteEinnahme.toISOString(),
+    interval_h: stdIntervall,
+    reminded: false
+  });
 
-  try {
-    const response = await fetch(`${SUPABASE_URL}/rest/v1/reminders`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "apikey": SUPABASE_KEY,
-        "Authorization": "Bearer " + token
-      },
-      body: JSON.stringify({
-        user_id: userData.user.id,
-        user_email: userData.user.email,
-        med_name: aktuellesMedikament.name,
-        next_time: naechsteEinnahme.toISOString(),
-        interval_h: stdIntervall,
-        reminded: false
-      })
-    });
-
-    if (!response.ok) throw new Error("Fehler beim Speichern des Reminders.");
-    document.getElementById("reminder-feedback").textContent = "Erinnerung erfolgreich gespeichert.";
-
-    // Einnahme im Log speichern
-    await supabase.from("intake_log").insert({
-      user_id: userData.user.id,
-      med_name: aktuellesMedikament.name,
-      confirmed: true
-    });
-
-    // Einnahmeverlauf neu laden
-    await loadIntakeHistory();
-    await loadActiveReminders();
-    await loadTakenMedications();
-  await loadTakenMedications();
-  await loadActiveReminders();
-    await loadTakenMedications();
-  await loadTakenMedications();
-
-  } catch (error) {
-    console.error(error);
+  if (insertError) {
+    console.error(insertError);
     document.getElementById("reminder-feedback").textContent = "Fehler beim Speichern der Erinnerung.";
+    return;
   }
+
+  document.getElementById("reminder-feedback").textContent = "Erinnerung erfolgreich gespeichert.";
+  fetchMedications();
 };
+
 
 
 
@@ -799,7 +774,7 @@ async function confirmReminder(id) {
     await loadActiveReminders();
     await loadTakenMedications();
   await loadTakenMedications();
-    await loadIntakeHistory();
+    
     await loadActiveReminders();
     await loadTakenMedications();
   await loadTakenMedications();
@@ -855,7 +830,8 @@ async function loadTakenMedications() {
 }
 
 
-// Erweiterung: Medikamentenübersicht mit Tabs
+// Neue Funktionen für Medikamenten-Übersicht (Tabs)
+
 async function fetchMedications() {
   const { data: userData } = await supabase.auth.getUser();
   if (!userData?.user) return;
@@ -930,9 +906,4 @@ function showTab(tab) {
   document.getElementById('tab-history').style.fontWeight = tab === 'history' ? 'bold' : 'normal';
 }
 
-// Tabs nach Login laden
-const origLogin = login;
-login = async function () {
-  await origLogin();
-  fetchMedications();
-};
+document.addEventListener('DOMContentLoaded', fetchMedications);
