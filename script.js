@@ -44,7 +44,7 @@ const medikamente = [
     "wechselwirkungen": "Blutverdünner, Kortison.",
     "nebenwirkungen": "Magenbeschwerden, Schwindel.",
     "einnahmeart": "schlucken",
-    "dosisintervall": "1",
+    "dosisintervall": "6",
     "kategorie": "Schmerzmittel",
     "max_einnahmedauer": "3 Tage ohne ärztliche Rücksprache"
   },
@@ -481,7 +481,26 @@ const medikamente = [
       0.5
     ]
   }
-];
+,
+  {
+    "name": "Testaminol",
+    "wirkstoff": "Placebocin",
+    "standarddosierung": "1 Tablette alle 0.01 h",
+    "einheit": "Tablette",
+    "wirkstoff_pro_einheit": 100,
+    "einheit_menge": 1,
+    "teilbarkeit": [1],
+    "hinweise": "Nur zu Testzwecken.",
+    "nahrung": "Keine",
+    "wechselwirkungen": "Keine",
+    "nebenwirkungen": "Keine",
+    "einnahmeart": "schlucken",
+    "dosisintervall": "0.01",
+    "kategorie": "Test",
+    "max_einnahmedauer": "unbegrenzt"
+  }
+]
+;
 
 window.filterMeds = function () {
   const search = document.getElementById("search-med").value.toLowerCase();
