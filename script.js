@@ -44,7 +44,7 @@ const medikamente = [
     "wechselwirkungen": "Blutverdünner, Kortison.",
     "nebenwirkungen": "Magenbeschwerden, Schwindel.",
     "einnahmeart": "schlucken",
-    "dosisintervall": "6",
+    "dosisintervall": "1",
     "kategorie": "Schmerzmittel",
     "max_einnahmedauer": "3 Tage ohne ärztliche Rücksprache"
   },
