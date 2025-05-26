@@ -44,7 +44,7 @@ const medikamente = [
     "wechselwirkungen": "Blutverdünner, Kortison.",
     "nebenwirkungen": "Magenbeschwerden, Schwindel.",
     "einnahmeart": "schlucken",
-    "dosisintervall": "1",
+    "dosisintervall": "6",
     "kategorie": "Schmerzmittel",
     "max_einnahmedauer": "3 Tage ohne ärztliche Rücksprache"
   },
@@ -621,3 +621,22 @@ window.onload = async function () {
       .eq("id", reminder.id);
   }
 };
+
+// Service Worker registrieren
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/service-worker.js')
+    .then(function(registration) {
+      console.log('Service Worker registriert mit Scope:', registration.scope);
+    }).catch(function(error) {
+      console.error('Fehler bei Service Worker Registrierung:', error);
+    });
+}
+
+// Berechtigung für Benachrichtigungen anfragen
+if ('Notification' in window && Notification.permission !== 'granted') {
+  Notification.requestPermission().then(permission => {
+    if (permission === 'granted') {
+      console.log("Benachrichtigungen erlaubt");
+    }
+  });
+}
