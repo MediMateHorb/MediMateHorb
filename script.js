@@ -84,27 +84,7 @@ const medikamente = [
     "kategorie": "Kinder",
     "max_einnahmedauer": "3 Tage"
   },
-  {
-    "name": "Diclofenac",
-    "wirkstoff": "Diclofenac",
-    "standarddosierung": "50 mg 2–3× täglich",
-    "einheit": "Tablette",
-    "wirkstoff_pro_einheit": 50,
-    "einheit_menge": 1,
-    "teilbarkeit": [
-      0.5,
-      1
-    ],
-    "hinweise": "Nach dem Essen mit Wasser.",
-    "nahrung": "Alkohol vermeiden.",
-    "wechselwirkungen": "Blutverdünner, Diuretika",
-    "nebenwirkungen": "Magenreizung",
-    "einnahmeart": "schlucken",
-    "dosisintervall": "8",
-    "kategorie": "Schmerzmittel",
-    "max_einnahmedauer": "5 Tage"
-  },
-  {
+    {
     "name": "Ambroxol",
     "wirkstoff": "Ambroxol",
     "standarddosierung": "30 mg 2–3× täglich",
@@ -161,27 +141,7 @@ const medikamente = [
     "kategorie": "Schmerzmittel",
     "max_einnahmedauer": "3–5 Tage"
   },
-  {
-    "name": "Ibuprofen 500",
-    "wirkstoff": "Ibuprofen",
-    "standarddosierung": "1 Tablette (500 mg), max. 1200–2400 mg/Tag je nach Alter",
-    "einheit": "Tablette",
-    "wirkstoff_pro_einheit": 500,
-    "einheit_menge": 1,
-    "teilbarkeit": [
-      1,
-      0.5
-    ],
-    "hinweise": "Mit oder nach dem Essen einnehmen.",
-    "nahrung": "Alkohol vermeiden.",
-    "wechselwirkungen": "Blutverdünner, Kortison",
-    "nebenwirkungen": "Magenbeschwerden",
-    "einnahmeart": "schlucken",
-    "dosisintervall": "6",
-    "kategorie": "Schmerzmittel",
-    "max_einnahmedauer": "3 Tage ohne ärztliche Rücksprache"
-  },
-  {
+    {
     "name": "Paracetamol 500",
     "wirkstoff": "Paracetamol",
     "standarddosierung": "1 Tablette (500 mg), max. 4.000 mg/Tag",
@@ -299,26 +259,6 @@ const medikamente = [
     "max_einnahmedauer": "je nach Infektion, in der Regel 5–10 Tage"
   },
   {
-    "name": "Ibuprofen",
-    "wirkstoff": "Ibuprofen",
-    "standarddosierung": "400 mg",
-    "max_tagesdosis": "1200 mg",
-    "hinweise": "Nach dem Essen, mit Wasser",
-    "nahrung": "Alkohol",
-    "wechselwirkungen": "Blutverduenner, SSRI",
-    "nebenwirkungen": "Magenbeschwerden",
-    "einnahmeart": "schlucken",
-    "dosisintervall": "6-8",
-    "kategorie": "Schmerzen",
-    "einheit": "Tablette",
-    "wirkstoff_pro_einheit": 400,
-    "einheit_menge": 1,
-    "teilbarkeit": [
-      1,
-      0.5
-    ]
-  },
-  {
     "name": "Paracetamol",
     "wirkstoff": "Paracetamol",
     "standarddosierung": "500 mg",
@@ -339,7 +279,7 @@ const medikamente = [
     ]
   },
   {
-    "name": "Aspirin",
+    "name": "Aspirin 100",
     "wirkstoff": "Acetylsalicylsaeure",
     "standarddosierung": "100 mg",
     "max_tagesdosis": "3000 mg",
@@ -398,27 +338,7 @@ const medikamente = [
       0.5
     ]
   },
-  {
-    "name": "Amoxicillin",
-    "wirkstoff": "Amoxicillin",
-    "standarddosierung": "500 mg",
-    "max_tagesdosis": "3000 mg",
-    "hinweise": "Mit Wasser, gleichmaessig ueber den Tag",
-    "nahrung": "Milchprodukte",
-    "wechselwirkungen": "Methotrexat, Allopurinol",
-    "nebenwirkungen": "Durchfall",
-    "einnahmeart": "schlucken",
-    "dosisintervall": "8",
-    "kategorie": "Antibiotika",
-    "einheit": "Tablette",
-    "wirkstoff_pro_einheit": 500,
-    "einheit_menge": 1,
-    "teilbarkeit": [
-      1,
-      0.5
-    ]
-  },
-  {
+    {
     "name": "Pantoprazol",
     "wirkstoff": "Pantoprazol",
     "standarddosierung": "40 mg",
@@ -478,27 +398,6 @@ const medikamente = [
       0.5
     ]
   },
-  {
-    "name": "Diclofenac",
-    "wirkstoff": "Diclofenac",
-    "standarddosierung": "50 mg",
-    "max_tagesdosis": "150 mg",
-    "hinweise": "Nach dem Essen, mit Wasser",
-    "nahrung": "Alkohol",
-    "wechselwirkungen": "Blutverduenner, Diuretika",
-    "nebenwirkungen": "Magenreizung",
-    "einnahmeart": "schlucken",
-    "dosisintervall": "8",
-    "kategorie": "Schmerzen",
-    "einheit": "Tablette",
-    "wirkstoff_pro_einheit": 50,
-    "einheit_menge": 1,
-    "teilbarkeit": [
-      1,
-      0.5
-    ]
-  }
-,
   {
     "name": "Testaminol",
     "wirkstoff": "Placebocin",
