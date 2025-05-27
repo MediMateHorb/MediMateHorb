@@ -916,26 +916,11 @@ async function confirmIntakeWithReminder(remind = true) {
     document.getElementById("reminder-status").textContent = `Einnahme wurde ohne weitere Erinnerung gespeichert.`;
   }
 
-  await supabase.from("intake_log").insert({
-    user_id: userData.user.id,
-    med_name: aktuellesMedikament.name,
-    confirmed: true,
-    time_taken: jetzt.toISOString(),
-    dosierung: dosierung
-  });
-
-  fetchMedications();
+  
 }
 
 
-  await supabase.from("intake_log").insert({
-    user_id: userData.user.id,
-    med_name: aktuellesMedikament.name,
-    confirmed: true,
-    time_taken: jetzt.toISOString()
-  });
-
-  fetchMedications();
+  
 }
 
 // Klick auf Reminderstatus zum Aktualisieren
