@@ -4,11 +4,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MediMate – Medikamentenplan</title>
+  <title>MediMate – Medikamentenübersicht</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  
+
   <header class="header">
     <div class="header-content">
       <img src="logo.png" alt="Logo" class="logo" />
@@ -57,10 +57,10 @@
       <p id="reminder-feedback"></p>
       <p id="reminder-hinweis">Hinweis: Die Dosierungsanzeige ist vereinfacht und ersetzt keine ärztliche Beratung.</p>
 
-      <!-- Medikamentenübersicht mit Tabs -->
+      <!-- Medikamentenübersicht -->
       <section id="medication-overview">
         <h2>Medikamentenübersicht</h2>
-        <div>
+        <div style="margin-bottom: 1rem;">
           <button onclick="showTab('upcoming')" id="tab-upcoming">🕒 Bevorstehend</button>
           <button onclick="showTab('history')" id="tab-history">📜 Historie</button>
         </div>
@@ -71,7 +71,7 @@
               <tr>
                 <th>Medikament</th>
                 <th>Dosierung</th>
-                <th>Nächste Einnahme</th>
+                <th>Einnahmezeitpunkt</th>
                 <th>Aktion</th>
               </tr>
             </thead>

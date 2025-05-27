@@ -835,7 +835,7 @@ async function fetchMedications() {
     const medRow = `
       <tr>
         <td>${entry.med_name}</td>
-        <td>${entry.interval_h}h</td>
+        <td>${entry.dosierung || '-'}</td>
         <td>${nextTime}</td>
         ${!isConfirmed
           ? `<td><button onclick="confirmMedication('${entry.id}')">Bestätigen</button></td>`
@@ -848,7 +848,7 @@ async function fetchMedications() {
       historyTable.innerHTML += `
         <tr>
           <td>${entry.med_name}</td>
-          <td>${entry.interval_h}h</td>
+          <td>${entry.dosierung || '-'}</td>
           <td>${nextTime}</td>
         </tr>
       `;
@@ -856,7 +856,7 @@ async function fetchMedications() {
       upcomingTable.innerHTML += `
         <tr>
           <td>${entry.med_name}</td>
-          <td>${entry.interval_h}h</td>
+          <td>${entry.dosierung || '-'}</td>
           <td>${nextTime}</td>
           <td><button onclick="toggleReminderStatus('${entry.id}')">Noch nicht eingenommen</button></td>
         </tr>
@@ -893,6 +893,7 @@ document.addEventListener('DOMContentLoaded', fetchMedications);
 
 
 // Erweiterte Einnahmefunktion mit/ohne Erinnerung
+
 async function confirmIntakeWithReminder(remind = true) {
   const jetzt = new Date();
   const stdIntervall = parseFloat(aktuellesMedikament.dosisintervall) || 6;
@@ -902,6 +903,8 @@ async function confirmIntakeWithReminder(remind = true) {
 
   if (!userData?.user) return alert("Nicht eingeloggt.");
 
+  const dosierung = document.getElementById("empf-dosierung").textContent || aktuellesMedikament?.standarddosierung || "";
+
   if (remind) {
     document.getElementById("reminder-status").textContent = `Du wirst um ${uhrzeit} an die nächste Einnahme erinnert.`;
     await supabase.from("reminders").insert({
@@ -910,11 +913,24 @@ async function confirmIntakeWithReminder(remind = true) {
       med_name: aktuellesMedikament.name,
       next_time: naechsteEinnahme.toISOString(),
       interval_h: stdIntervall,
-      reminded: false
+      reminded: false,
+      dosierung: dosierung
     });
   } else {
     document.getElementById("reminder-status").textContent = `Einnahme wurde ohne weitere Erinnerung gespeichert.`;
   }
+
+  await supabase.from("intake_log").insert({
+    user_id: userData.user.id,
+    med_name: aktuellesMedikament.name,
+    confirmed: true,
+    time_taken: jetzt.toISOString(),
+    dosierung: dosierung
+  });
+
+  fetchMedications();
+}
+
 
   await supabase.from("intake_log").insert({
     user_id: userData.user.id,
