@@ -24,12 +24,77 @@
     </section>
 
     <section id="main-section" style="display:none;">
-      <!-- Inhalte wie bisher -->
-      <p>Inhalte werden hier geladen...</p>
+      <h2>Medikamentenplan erstellen</h2>
+
+      <input id="search-med" type="text" placeholder="Suche Medikament..." oninput="filterMeds()" />
+      <select id="med-dropdown"></select>
+
+      <h3>Patientendaten</h3>
+      <input id="age" type="number" placeholder="Alter in Jahren" />
+      <input id="weight" type="number" placeholder="Gewicht in kg" />
+      <button onclick="calculateDosage()">Dosierung berechnen</button>
+
+      <section id="results">
+        <h3>Ergebnisse</h3>
+        <p><strong>Empfohlene Dosierung:</strong> <span id="empf-dosierung"></span></p>
+        <p><strong>Wirkstoff:</strong> <span id="wirkstoff"></span></p>
+        <p><strong>Standarddosierung:</strong> <span id="std-dosierung"></span></p>
+        <p><strong>Einnahmehinweise:</strong> <span id="hinweise"></span></p>
+        <p><strong>Unverträgliche Nahrung:</strong> <span id="nahrung"></span></p>
+        <p><strong>Wechselwirkungen:</strong> <span id="wechselwirkungen"></span></p>
+        <p><strong>Nebenwirkungen:</strong> <span id="nebenwirkungen"></span></p>
+        <p><strong>Einnahmeart:</strong> <span id="einnahmeart"></span></p>
+        <p><strong>Dosisintervall:</strong> <span id="dosisintervall"></span></p>
+        <p><strong>Kategorie:</strong> <span id="kategorie"></span></p>
+        <p><strong>Maximale Einnahmedauer:</strong> <span id="max-einnahmedauer"></span></p>
+      </section>
+
+      <h3>Einnahme bestätigen</h3>
+      <button onclick="confirmIntakeWithReminder(true)">💊 Einnahme bestätigen mit Erinnerung</button>
+      <button onclick="confirmIntakeWithReminder(false)">✅ Nur Einnahme bestätigen</button>
+      <p id="reminder-status"></p>
+      <p id="reminder-feedback"></p>
+      <p id="reminder-hinweis">Hinweis: Die Dosierungsanzeige ist vereinfacht und ersetzt keine ärztliche Beratung.</p>
+
+      <!-- Medikamentenübersicht -->
+      <section id="medication-overview">
+        <h2>Medikamentenübersicht</h2>
+        <div style="margin-bottom: 1rem;">
+          <button onclick="showTab('upcoming')" id="tab-upcoming">🕒 Bevorstehend</button>
+          <button onclick="showTab('history')" id="tab-history">📜 Historie</button>
+        </div>
+
+        <div id="tab-content-upcoming" class="tab-content" style="display: block;">
+          <table id="upcoming-table">
+            <thead>
+              <tr>
+                <th>Medikament</th>
+                <th>Dosierung</th>
+                <th>Einnahmezeitpunkt</th>
+                <th>Aktion</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div id="tab-content-history" class="tab-content" style="display: none;">
+          <table id="history-table">
+            <thead>
+              <tr>
+                <th>Medikament</th>
+                <th>Dosierung</th>
+                <th>Einnahmezeitpunkt</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
     </section>
   </main>
 
-  <!-- Das korrekte Skript wird geladen -->
+  <!-- Wichtig: KEIN module-Attribut -->
   <script src="script.js"></script>
 </body>
 </html>
