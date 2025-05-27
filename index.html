@@ -4,11 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MediMate – Medikamentenübersicht</title>
+  <title>MediMate – Medikamentenplan</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
   <header class="header">
     <div class="header-content">
       <img src="logo.png" alt="Logo" class="logo" />
@@ -57,29 +56,29 @@
       <p id="reminder-feedback"></p>
       <p id="reminder-hinweis">Hinweis: Die Dosierungsanzeige ist vereinfacht und ersetzt keine ärztliche Beratung.</p>
 
-      <!-- Medikamentenübersicht -->
+      <!-- Neue Medikamentenübersicht -->
       <section id="medication-overview">
         <h2>Medikamentenübersicht</h2>
-        <div style="margin-bottom: 1rem;">
+        <div>
           <button onclick="showTab('upcoming')" id="tab-upcoming">🕒 Bevorstehend</button>
           <button onclick="showTab('history')" id="tab-history">📜 Historie</button>
         </div>
 
-        <div id="tab-content-upcoming" class="tab-content" style="display: block;">
+        <div id="tab-content-upcoming" class="tab-content">
           <table id="upcoming-table">
             <thead>
               <tr>
                 <th>Medikament</th>
                 <th>Dosierung</th>
-                <th>Einnahmezeitpunkt</th>
-                <th>Aktion</th>
+                <th>Nächste Einnahme</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody></tbody>
           </table>
         </div>
 
-        <div id="tab-content-history" class="tab-content" style="display: none;">
+        <div id="tab-content-history" class="tab-content" style="display:none">
           <table id="history-table">
             <thead>
               <tr>
@@ -95,7 +94,7 @@
     </section>
   </main>
 
-  <!-- Wichtig: KEIN module-Attribut -->
-  <script src="script_final_login_fixed.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

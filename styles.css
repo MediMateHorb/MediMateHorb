@@ -1,46 +1,58 @@
+
 body {
   font-family: Arial, sans-serif;
-  background-color: #f5f7fa;
+  background-color: #f4f6f8;
   margin: 0;
   padding: 0;
 }
 
 .header {
   background-color: #0077cc;
-  color: white;
-  text-align: center;
-  padding: 1rem;
+  padding: 1rem 2rem;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .logo {
-  width: 60px;
-  height: auto;
+  height: 64px;
+  width: auto;
   border-radius: 8px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.2);
+}
+
+.header-content h1 {
+  color: white;
+  font-size: 1.8rem;
+  margin: 0;
 }
 
 #app {
-  max-width: 900px;
+  max-width: 700px;
   margin: 2rem auto;
-  padding: 1.5rem;
-  background: white;
+  padding: 2rem;
+  background-color: white;
   border-radius: 8px;
-  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-input, button, select {
-  padding: 0.5rem;
-  margin: 0.5rem 0;
+input, select, button {
   width: 100%;
-  font-size: 1rem;
-  border-radius: 6px;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
   border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 1rem;
 }
 
 button {
   background-color: #0077cc;
   color: white;
   border: none;
-  border-radius: 6px;
   cursor: pointer;
 }
 
@@ -48,24 +60,161 @@ button:hover {
   background-color: #005fa3;
 }
 
-table {
+h1, h2, h3 {
+  color: #333;
+}
+
+#results p {
+  margin: 0.5rem 0;
+}
+
+#reminder-status {
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #007700;
+}
+
+#reminder-hinweis {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #aa0000;
+}
+
+#medication-overview {
+  margin-top: 2rem;
+}
+
+#medication-overview button {
+  margin-right: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+#medication-overview table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 1rem;
 }
 
-th, td {
-  padding: 0.75rem;
+#medication-overview th, #medication-overview td {
   border: 1px solid #ccc;
+  padding: 0.5rem;
   text-align: left;
 }
 
-th {
+@media (max-width: 600px) {
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .logo {
+    width: 80px;
+    height: auto;
+    margin-bottom: 0.5rem;
+  }
+
+  .header-content h1 {
+    font-size: 1.4rem;
+  }
+
+  #app {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  input, select, button {
+    font-size: 0.95rem;
+    padding: 0.6rem;
+  }
+}
+
+#medication-overview {
+  margin-top: 2rem;
+}
+
+#medication-overview button {
+  margin-right: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+#medication-overview table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+#medication-overview th, #medication-overview td {
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+
+body.dark-mode {
+  background-color: #1e1e1e;
+  color: #f4f4f4;
+}
+
+body.dark-mode #app {
+  background-color: #2a2a2a;
+  color: #f4f4f4;
+}
+
+button {
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+button:hover {
+  transform: scale(1.02);
+}
+
+#medication-overview h2 {
+  margin-top: 2rem;
+  font-size: 1.4rem;
+}
+
+.tab-content {
+  margin-top: 1rem;
+}
+
+table th {
   background-color: #0077cc;
   color: white;
 }
 
-.tabs button {
-  margin-right: 1rem;
-  padding: 0.5rem 1rem;
+table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+body.dark-mode table th {
+  background-color: #444;
+}
+
+body.dark-mode table tbody tr:nth-child(even) {
+  background-color: #333;
+}
+
+.status-btn {
+  background-color: orange;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.status-btn:hover {
+  background-color: darkorange;
+}
+
+.toggle-darkmode {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #444;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
 }
