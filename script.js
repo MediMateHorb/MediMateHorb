@@ -13,23 +13,20 @@ window.login = async function () {
   }
   document.getElementById("login-section").style.display = "none";
   document.getElementById("main-section").style.display = "block";
-  
-  await checkReminder(data.user.id);
+
   setInterval(async () => {
     const { data: userData } = await supabase.auth.getUser();
     if (userData?.user) {
-      await checkReminder(userData.user.id);
+
     }
   }, 5 * 60 * 1000); // alle 5 Minuten
 
   filterMeds();
-  
-    await loadActiveReminders();
-    await loadTakenMedications();
-  await loadTakenMedications();
-  await loadActiveReminders();
-    await loadTakenMedications();
-  await loadTakenMedications();
+
+
+
+
+
 
 };
 
@@ -654,7 +651,7 @@ if ('Notification' in window && Notification.permission !== 'granted') {
 setInterval(async () => {
   const { data: userData } = await supabase.auth.getUser();
   if (userData?.user) {
-    await checkReminder(userData.user.id);
+
   }
 }, 5 * 60 * 1000); // alle 5 Minuten
 
@@ -744,15 +741,14 @@ async function confirmReminder(id) {
     .eq("id", id);
 
   if (!error) {
-    await loadActiveReminders();
-    await loadTakenMedications();
-  await loadTakenMedications();
-    
-    await loadActiveReminders();
-    await loadTakenMedications();
-  await loadTakenMedications();
-  await loadActiveReminders();
-    await loadTakenMedications();
+
+
+
+
+
+
+
+
   await loadTakenMedications(); // aktualisiert Historie
   }
 }
