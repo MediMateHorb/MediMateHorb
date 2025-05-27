@@ -917,11 +917,9 @@ async function confirmIntakeWithReminder(remind = true) {
   }
 
   
-}
 
 
   
-}
 
 // Klick auf Reminderstatus zum Aktualisieren
 async function toggleReminderStatus(reminderId) {
@@ -936,4 +934,3 @@ async function toggleReminderStatus(reminderId) {
   }
 
   fetchMedications();
-}
