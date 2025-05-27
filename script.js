@@ -101,57 +101,6 @@ const medikamente = [
   "kategorie": "Allergie",
   "max_einnahmedauer": "max. 2 Wochen ohne Rücksprache"
 },
-  {
-  "name": "Novalgin Tropfen",
-  "wirkstoff": "Metamizol",
-  "standarddosierung": "10–20 mg/kg KG je Dosis, max. 4× täglich",
-  "einheit": "Tropfen",
-  "wirkstoff_pro_einheit": 500,
-  "einheit_menge": 1,
-  "teilbarkeit": [1],
-  "hinweise": "Tropfen in Wasser verdünnt einnehmen.",
-  "nahrung": "Unabhängig von Mahlzeiten",
-  "wechselwirkungen": "Blutdrucksenker, Alkohol",
-  "nebenwirkungen": "Blutbildveränderung (selten), Kreislaufprobleme",
-  "einnahmeart": "schlucken",
-  "dosisintervall": "6",
-  "kategorie": "Schmerzmittel",
-  "max_einnahmedauer": "Nur unter ärztlicher Kontrolle"
-},
-{
-  "name": "Amoxicillin Saft",
-  "wirkstoff": "Amoxicillin",
-  "standarddosierung": "20–40 mg/kg/Tag in 2–3 Dosen",
-  "einheit": "Saft",
-  "wirkstoff_pro_einheit": 250,
-  "einheit_menge": 5,
-  "teilbarkeit": [1],
-  "hinweise": "Kurz vor dem Essen geben.",
-  "nahrung": "Nicht mit Milch",
-  "wechselwirkungen": "Allopurinol, orale Kontrazeptiva",
-  "nebenwirkungen": "Durchfall, Hautausschlag",
-  "einnahmeart": "schlucken",
-  "dosisintervall": "8",
-  "kategorie": "Antibiotikum",
-  "max_einnahmedauer": "je nach Infektion 5–10 Tage"
-},
-  {
-  "name": "Prednisolon 20 mg",
-  "wirkstoff": "Prednisolon",
-  "standarddosierung": "1–2 mg/kg (Kinder) oder 20–60 mg (Erwachsene)",
-  "einheit": "Tablette",
-  "wirkstoff_pro_einheit": 20,
-  "einheit_menge": 1,
-  "teilbarkeit": [1, 0.5],
-  "hinweise": "Morgens einnehmen, nicht abrupt absetzen.",
-  "nahrung": "Mit oder nach dem Essen",
-  "wechselwirkungen": "NSAIDs, Impfstoffe",
-  "nebenwirkungen": "Immunsuppression, Appetitsteigerung",
-  "einnahmeart": "schlucken",
-  "dosisintervall": "24",
-  "kategorie": "Kortison",
-  "max_einnahmedauer": "Wie vom Arzt verordnet"
-},
 {
   "name": "Loratadin 10 mg",
   "wirkstoff": "Loratadin",
@@ -406,27 +355,7 @@ window.calculateDosage = function () {
     else if (age >= 16 && age < 65) dosierung = "1–2 Tabletten (500–1000 mg)";
     else if (age >= 65) dosierung = "1 Tablette (500 mg)";
     else dosierung = "Nicht empfohlen für < 12 Jahren";
-      } else if (w.includes("metamizol") && weight) {
-    const mgMin = (10 * weight).toFixed(0);
-    const mgMax = (20 * weight).toFixed(0);
-    dosierung = `${mgMin}–${mgMax} mg alle 6–8 Stunden`;
-    const tropfenMin = Math.round((mgMin / 500) * 20);
-    const tropfenMax = Math.round((mgMax / 500) * 20);
-    dosierung += ` (${tropfenMin}–${tropfenMax} Tropfen)`;
-  } else if (med.name.toLowerCase().includes("amoxicillin saft") && weight) {
-    const mgMin = (20 * weight).toFixed(0);
-    const mgMax = (40 * weight).toFixed(0);
-    const mlMin = (mgMin / 250 * 5).toFixed(1);
-    const mlMax = (mgMax / 250 * 5).toFixed(1);
-    dosierung = `${mlMin}–${mlMax} ml (${mgMin}–${mgMax} mg) aufgeteilt in 2–3 Dosen pro Tag`;
-  } else if (w.includes("prednisolon") && weight && age) {
-    if (age < 18) {
-      const mgMin = (1 * weight).toFixed(0);
-      const mgMax = (2 * weight).toFixed(0);
-      dosierung = `${mgMin}–${mgMax} mg täglich`;
-    } else {
-      dosierung = "20–60 mg täglich je nach ärztlicher Verordnung";
-    } else if (w.includes("acetylcystein") && age) {
+  } else if (w.includes("acetylcystein") && age) {
     if (age >= 2 && age <= 5) dosierung = "5 ml 2–3× täglich (200–300 mg)";
     else if (age >= 6 && age <= 14) dosierung = "10 ml 2× täglich (400 mg)";
     else if (age >= 15) dosierung = "10 ml 3× täglich (600 mg)";
