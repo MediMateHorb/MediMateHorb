@@ -8,8 +8,7 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <button class="toggle-darkmode" onclick="document.body.classList.toggle('dark-mode')">🌓 Modus wechseln</button>
-
+  
   <header class="header">
     <div class="header-content">
       <img src="logo.png" alt="Logo" class="logo" />
@@ -66,7 +65,7 @@
           <button onclick="showTab('history')" id="tab-history">📜 Historie</button>
         </div>
 
-        <div id="tab-content-upcoming" class="tab-content">
+        <div id="tab-content-upcoming" class="tab-content" style="display: block;">
           <table id="upcoming-table">
             <thead>
               <tr>
@@ -80,7 +79,7 @@
           </table>
         </div>
 
-        <div id="tab-content-history" class="tab-content" style="display:none">
+        <div id="tab-content-history" class="tab-content" style="display: none;">
           <table id="history-table">
             <thead>
               <tr>
