@@ -84,6 +84,57 @@ const medikamente = [
     "kategorie": "Husten",
     "max_einnahmedauer": "5 Tage"
   },
+  {
+  "name": "Cetirizin 10 mg",
+  "wirkstoff": "Cetirizin",
+  "standarddosierung": "10 mg 1× täglich (Erwachsene), 5 mg für Kinder ab 6",
+  "einheit": "Tablette",
+  "wirkstoff_pro_einheit": 10,
+  "einheit_menge": 1,
+  "teilbarkeit": [1, 0.5],
+  "hinweise": "Abends einnehmen, da müde machend.",
+  "nahrung": "Keine Einschränkungen",
+  "wechselwirkungen": "Beruhigungsmittel",
+  "nebenwirkungen": "Müdigkeit, Kopfschmerzen",
+  "einnahmeart": "schlucken",
+  "dosisintervall": "24",
+  "kategorie": "Allergie",
+  "max_einnahmedauer": "max. 2 Wochen ohne Rücksprache"
+},
+{
+  "name": "Loratadin 10 mg",
+  "wirkstoff": "Loratadin",
+  "standarddosierung": "10 mg 1× täglich",
+  "einheit": "Tablette",
+  "wirkstoff_pro_einheit": 10,
+  "einheit_menge": 1,
+  "teilbarkeit": [1],
+  "hinweise": "Morgens einnehmen.",
+  "nahrung": "Keine",
+  "wechselwirkungen": "Ketoconazol, Erythromycin",
+  "nebenwirkungen": "Schläfrigkeit (selten)",
+  "einnahmeart": "schlucken",
+  "dosisintervall": "24",
+  "kategorie": "Allergie",
+  "max_einnahmedauer": "bis zu 14 Tage"
+},
+{
+  "name": "Nurofen Junior Saft",
+  "wirkstoff": "Ibuprofen",
+  "standarddosierung": "5–10 mg/kg alle 6–8 h",
+  "einheit": "Saft",
+  "wirkstoff_pro_einheit": 100,
+  "einheit_menge": 5,
+  "teilbarkeit": [1],
+  "hinweise": "Mit Essen oder Milch einnehmen.",
+  "nahrung": "Keine Einschränkungen",
+  "wechselwirkungen": "Blutverdünner, Kortison",
+  "nebenwirkungen": "Magenbeschwerden",
+  "einnahmeart": "schlucken",
+  "dosisintervall": "8",
+  "kategorie": "Fieber/Schmerz",
+  "max_einnahmedauer": "3 Tage ohne Arzt"
+},
    {
     "name": "Aspirin 500",
     "wirkstoff": "Acetylsalicylsäure",
@@ -281,6 +332,14 @@ window.calculateDosage = function () {
     else if (weight >= 33 && weight <= 43) dosierung = "1 Tablette (500 mg)";
     else if (weight > 43) dosierung = "1–2 Tabletten (500–1000 mg)";
     else dosierung = "Nicht empfohlen für < 17 kg";
+} else if (w.includes("cetirizin") && age) {
+    if (age >= 6 && age < 12) dosierung = "½ Tablette (5 mg)";
+    else if (age >= 12) dosierung = "1 Tablette (10 mg)";
+    else dosierung = "Nicht empfohlen für < 6 Jahre";
+  } else if (w.includes("loratadin") && age) {
+    if (age >= 2 && age < 12 && weight <= 30) dosierung = "5 mg einmal täglich (½ Tablette)";
+    else if ((age >= 2 && weight > 30) || age >= 12) dosierung = "10 mg einmal täglich (1 Tablette)";
+    else dosierung = "Nicht empfohlen für < 2 Jahre";
   } else if (w.includes("acetylsalicylsäure") && age) {
     if (age >= 12 && age <= 15 && weight >= 40 && weight <= 50) dosierung = "1 Tablette (500 mg)";
     else if (age >= 16 && age < 65) dosierung = "1–2 Tabletten (500–1000 mg)";
