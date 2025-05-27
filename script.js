@@ -13,20 +13,23 @@ window.login = async function () {
   }
   document.getElementById("login-section").style.display = "none";
   document.getElementById("main-section").style.display = "block";
-
+  
+  await checkReminder(data.user.id);
   setInterval(async () => {
     const { data: userData } = await supabase.auth.getUser();
     if (userData?.user) {
-
+      await checkReminder(userData.user.id);
     }
   }, 5 * 60 * 1000); // alle 5 Minuten
 
   filterMeds();
-
-
-
-
-
+  
+    await loadActiveReminders();
+    await loadTakenMedications();
+  await loadTakenMedications();
+  await loadActiveReminders();
+    await loadTakenMedications();
+  await loadTakenMedications();
 
 };
 
@@ -651,7 +654,7 @@ if ('Notification' in window && Notification.permission !== 'granted') {
 setInterval(async () => {
   const { data: userData } = await supabase.auth.getUser();
   if (userData?.user) {
-
+    await checkReminder(userData.user.id);
   }
 }, 5 * 60 * 1000); // alle 5 Minuten
 
@@ -741,14 +744,15 @@ async function confirmReminder(id) {
     .eq("id", id);
 
   if (!error) {
-
-
-
-
-
-
-
-
+    await loadActiveReminders();
+    await loadTakenMedications();
+  await loadTakenMedications();
+    
+    await loadActiveReminders();
+    await loadTakenMedications();
+  await loadTakenMedications();
+  await loadActiveReminders();
+    await loadTakenMedications();
   await loadTakenMedications(); // aktualisiert Historie
   }
 }
@@ -916,10 +920,27 @@ async function confirmIntakeWithReminder(remind = true) {
     document.getElementById("reminder-status").textContent = `Einnahme wurde ohne weitere Erinnerung gespeichert.`;
   }
 
-  
+  await supabase.from("intake_log").insert({
+    user_id: userData.user.id,
+    med_name: aktuellesMedikament.name,
+    confirmed: true,
+    time_taken: jetzt.toISOString(),
+    dosierung: dosierung
+  });
+
+  fetchMedications();
+}
 
 
-  
+  await supabase.from("intake_log").insert({
+    user_id: userData.user.id,
+    med_name: aktuellesMedikament.name,
+    confirmed: true,
+    time_taken: jetzt.toISOString()
+  });
+
+  fetchMedications();
+}
 
 // Klick auf Reminderstatus zum Aktualisieren
 async function toggleReminderStatus(reminderId) {
@@ -934,3 +955,4 @@ async function toggleReminderStatus(reminderId) {
   }
 
   fetchMedications();
+}
