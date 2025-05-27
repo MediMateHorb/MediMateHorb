@@ -332,6 +332,16 @@ window.calculateDosage = function () {
     else if (weight >= 33 && weight <= 43) dosierung = "1 Tablette (500 mg)";
     else if (weight > 43) dosierung = "1–2 Tabletten (500–1000 mg)";
     else dosierung = "Nicht empfohlen für < 17 kg";
+    } else if (med.name.toLowerCase().includes("nurofen") && weight) {
+    if (weight > 40) {
+      dosierung = "Nicht empfohlen für Erwachsene – bitte Ibuprofen Tablette verwenden";
+    } else {
+      const mgMin = 5 * weight;
+      const mgMax = 10 * weight;
+      const mlMin = (mgMin / 100 * 5).toFixed(1);
+      const mlMax = (mgMax / 100 * 5).toFixed(1);
+      dosierung = `${mlMin}–${mlMax} ml (${mgMin}–${mgMax} mg) alle 6–8 Stunden`;
+    }
 } else if (w.includes("cetirizin") && age) {
     if (age >= 6 && age < 12) dosierung = "½ Tablette (5 mg)";
     else if (age >= 12) dosierung = "1 Tablette (10 mg)";
