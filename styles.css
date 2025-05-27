@@ -1,0 +1,83 @@
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  background-color: #0077cc;
+  padding: 1rem;
+  text-align: center;
+  color: white;
+}
+
+.logo {
+  width: 80px;
+  height: auto;
+  border-radius: 8px;
+}
+
+#app {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+input, select, button {
+  display: block;
+  width: 100%;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #005fa3;
+}
+
+h2 {
+  margin-top: 2rem;
+  color: #333;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+th {
+  background-color: #0077cc;
+  color: white;
+}
+
+.tab-content {
+  margin-top: 1rem;
+}
+
+#tab-upcoming, #tab-history {
+  margin-right: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+}
