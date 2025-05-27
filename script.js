@@ -65,26 +65,7 @@ const medikamente = [
     "kategorie": "Schmerzmittel",
     "max_einnahmedauer": "3 Tage ohne ärztliche Rücksprache"
   },
-  {
-    "name": "Paracetamol Zäpfchen",
-    "wirkstoff": "Paracetamol",
-    "standarddosierung": "125 mg alle 6–8 Stunden",
-    "einheit": "Zäpfchen",
-    "wirkstoff_pro_einheit": 125,
-    "einheit_menge": 1,
-    "teilbarkeit": [
-      1
-    ],
-    "hinweise": "Rektal verabreichen.",
-    "nahrung": "Keine",
-    "wechselwirkungen": "Leberenzyme-induzierende Medikamente",
-    "nebenwirkungen": "Lebertoxizität",
-    "einnahmeart": "rektal",
-    "dosisintervall": "6",
-    "kategorie": "Kinder",
-    "max_einnahmedauer": "3 Tage"
-  },
-    {
+      {
     "name": "Ambroxol",
     "wirkstoff": "Ambroxol",
     "standarddosierung": "30 mg 2–3× täglich",
@@ -103,26 +84,7 @@ const medikamente = [
     "kategorie": "Husten",
     "max_einnahmedauer": "5 Tage"
   },
-  {
-    "name": "Metamizol",
-    "wirkstoff": "Metamizol",
-    "standarddosierung": "500 mg 3× täglich",
-    "einheit": "Tablette",
-    "wirkstoff_pro_einheit": 500,
-    "einheit_menge": 1,
-    "teilbarkeit": [
-      1
-    ],
-    "hinweise": "Mit Wasser einnehmen.",
-    "nahrung": "Keine",
-    "wechselwirkungen": "Blutdrucksenker",
-    "nebenwirkungen": "Kreislaufprobleme",
-    "einnahmeart": "schlucken",
-    "dosisintervall": "8",
-    "kategorie": "Schmerzmittel",
-    "max_einnahmedauer": "nach Anweisung"
-  },
-  {
+   {
     "name": "Aspirin 500",
     "wirkstoff": "Acetylsalicylsäure",
     "standarddosierung": "1–2 Tabletten (500–1000 mg), max. 6 Tabletten täglich",
@@ -180,27 +142,7 @@ const medikamente = [
     "kategorie": "Magen",
     "max_einnahmedauer": "2–8 Wochen"
   },
-  {
-    "name": "Metformin 500",
-    "wirkstoff": "Metformin",
-    "standarddosierung": "500 mg 2–3× täglich, max. 3000 mg",
-    "einheit": "Tablette",
-    "wirkstoff_pro_einheit": 500,
-    "einheit_menge": 1,
-    "teilbarkeit": [
-      1,
-      0.5
-    ],
-    "hinweise": "Zu den Mahlzeiten einnehmen.",
-    "nahrung": "Alkohol vermeiden.",
-    "wechselwirkungen": "Kontrastmittel, Diuretika",
-    "nebenwirkungen": "Magen-Darm-Beschwerden",
-    "einnahmeart": "schlucken",
-    "dosisintervall": "12",
-    "kategorie": "Diabetes",
-    "max_einnahmedauer": "Dauertherapie"
-  },
-  {
+    {
     "name": "ACC Kindersaft",
     "wirkstoff": "Acetylcystein",
     "standarddosierung": "Je nach Alter 5–10 ml, 2–3× täglich",
@@ -258,27 +200,7 @@ const medikamente = [
     "kategorie": "Antibiotikum",
     "max_einnahmedauer": "je nach Infektion, in der Regel 5–10 Tage"
   },
-  {
-    "name": "Paracetamol",
-    "wirkstoff": "Paracetamol",
-    "standarddosierung": "500 mg",
-    "max_tagesdosis": "4000 mg",
-    "hinweise": "Mit Wasser, nuechtern oder nach dem Essen",
-    "nahrung": "Alkohol",
-    "wechselwirkungen": "Leberenzyme-induzierende Medikamente",
-    "nebenwirkungen": "Lebertoxizitaet",
-    "einnahmeart": "schlucken",
-    "dosisintervall": "4-6",
-    "kategorie": "Schmerzen/Fieber",
-    "einheit": "Tablette",
-    "wirkstoff_pro_einheit": 500,
-    "einheit_menge": 1,
-    "teilbarkeit": [
-      1,
-      0.5
-    ]
-  },
-  {
+    {
     "name": "Aspirin 100",
     "wirkstoff": "Acetylsalicylsaeure",
     "standarddosierung": "100 mg",
@@ -298,107 +220,7 @@ const medikamente = [
       0.5
     ]
   },
-  {
-    "name": "Omeprazol",
-    "wirkstoff": "Omeprazol",
-    "standarddosierung": "20 mg",
-    "max_tagesdosis": "40 mg",
-    "hinweise": "Morgens nuechtern",
-    "nahrung": "Grapefruit",
-    "wechselwirkungen": "Clopidogrel, Diazepam",
-    "nebenwirkungen": "Kopfschmerzen",
-    "einnahmeart": "schlucken",
-    "dosisintervall": "24",
-    "kategorie": "Magen",
-    "einheit": "Tablette",
-    "wirkstoff_pro_einheit": 20,
-    "einheit_menge": 1,
-    "teilbarkeit": [
-      1,
-      0.5
-    ]
-  },
-  {
-    "name": "Metformin",
-    "wirkstoff": "Metformin",
-    "standarddosierung": "500 mg",
-    "max_tagesdosis": "2000 mg",
-    "hinweise": "Zum Essen",
-    "nahrung": "Alkohol",
-    "wechselwirkungen": "Kontrastmittel, Diuretika",
-    "nebenwirkungen": "Magendarmbeschwerden",
-    "einnahmeart": "schlucken",
-    "dosisintervall": "12",
-    "kategorie": "Diabetes",
-    "einheit": "Tablette",
-    "wirkstoff_pro_einheit": 500,
-    "einheit_menge": 1,
-    "teilbarkeit": [
-      1,
-      0.5
-    ]
-  },
-    {
-    "name": "Pantoprazol",
-    "wirkstoff": "Pantoprazol",
-    "standarddosierung": "40 mg",
-    "max_tagesdosis": "80 mg",
-    "hinweise": "Vor dem Essen",
-    "nahrung": "Grapefruit",
-    "wechselwirkungen": "Atazanavir, Ketoconazol",
-    "nebenwirkungen": "Schwindel",
-    "einnahmeart": "schlucken",
-    "dosisintervall": "24",
-    "kategorie": "Magen",
-    "einheit": "Tablette",
-    "wirkstoff_pro_einheit": 40,
-    "einheit_menge": 1,
-    "teilbarkeit": [
-      1,
-      0.5
-    ]
-  },
-  {
-    "name": "Simvastatin",
-    "wirkstoff": "Simvastatin",
-    "standarddosierung": "20 mg",
-    "max_tagesdosis": "40 mg",
-    "hinweise": "Abends",
-    "nahrung": "Grapefruit",
-    "wechselwirkungen": "CYP3A4-Hemmer",
-    "nebenwirkungen": "Muskelschmerzen",
-    "einnahmeart": "schlucken",
-    "dosisintervall": "24",
-    "kategorie": "Cholesterin",
-    "einheit": "Tablette",
-    "wirkstoff_pro_einheit": 20,
-    "einheit_menge": 1,
-    "teilbarkeit": [
-      1,
-      0.5
-    ]
-  },
-  {
-    "name": "Levothyroxin",
-    "wirkstoff": "Levothyroxin",
-    "standarddosierung": "50 µg",
-    "max_tagesdosis": "200 µg",
-    "hinweise": "Morgens nuechtern",
-    "nahrung": "Soja",
-    "wechselwirkungen": "Eisenpraeparate, Kalzium",
-    "nebenwirkungen": "Herzrasen",
-    "einnahmeart": "schlucken",
-    "dosisintervall": "24",
-    "kategorie": "Schilddruese",
-    "einheit": "Tablette",
-    "wirkstoff_pro_einheit": 50,
-    "einheit_menge": 1,
-    "teilbarkeit": [
-      1,
-      0.5
-    ]
-  },
-  {
+              {
     "name": "Testaminol",
     "wirkstoff": "Placebocin",
     "standarddosierung": "1 Tablette alle 0.01 h",
